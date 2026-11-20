@@ -1,0 +1,3536 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="theme-color" content="#0f172a" />
+  <title>管理学原理 · 交互式期末复习思维导图（框架记忆 + 课件原文 + 考点补充）</title>
+  <style>
+    :root {
+      --bg-canvas: #f8fafc;
+      --dot-color: #cbd5e1;
+      --surface: #ffffff;
+      --surface-subtle: #f1f5f9;
+      --border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+      --c-root: #0f172a;
+      --c-ch1: #059669;
+      --c-ch1-bg: #ecfdf5;
+      --c-ch1-bd: #6ee7b7;
+      --c-ch2: #2563eb;
+      --c-ch2-bg: #eff6ff;
+      --c-ch2-bd: #93c5fd;
+      --c-ch3: #7c3aed;
+      --c-ch3-bg: #f5f3ff;
+      --c-ch3-bd: #c4b5fd;
+      --c-ch4: #0891b2;
+      --c-ch4-bg: #ecfeff;
+      --c-ch4-bd: #67e8f9;
+      --c-ch5: #e11d48;
+      --c-ch5-bg: #fff1f2;
+      --c-ch5-bd: #fda4af;
+      --c-supp: #d97706;
+      --c-supp-bg: #fffbeb;
+      --c-supp-bd: #fcd34d;
+      --c-warn: #dc2626;
+      --c-warn-bg: #fef2f2;
+      --c-warn-bd: #fca5a5;
+      --shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.10);
+      --shadow-lg: 0 16px 36px rgba(15, 23, 42, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+      color: var(--text-main);
+      background: var(--bg-canvas);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top App Header & Toolbars */
+    .app-shell {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+    }
+
+    .top-header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 8px 14px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      z-index: 40;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-badge {
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 5px 10px;
+      border-radius: 8px;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    .brand-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: none;
+    }
+
+    @media (min-width: 960px) {
+      .brand-sub {
+        display: inline-block;
+      }
+    }
+
+    .mode-tabs {
+      display: flex;
+      background: var(--surface-subtle);
+      padding: 3px;
+      border-radius: 9px;
+      gap: 3px;
+    }
+
+    .mode-tab {
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 5px 11px;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      white-space: nowrap;
+    }
+
+    .mode-tab:hover {
+      color: var(--text-main);
+    }
+
+    .mode-tab.active {
+      background: var(--surface);
+      color: #1d4ed8;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.08);
+    }
+
+    .sub-toolbar {
+      background: #fcfdff;
+      border-bottom: 1px solid var(--border);
+      padding: 6px 14px;
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      align-items: center;
+      gap: 5px;
+      z-index: 35;
+    }
+
+    .sub-toolbar.hidden {
+      display: none;
+    }
+
+    .tool-group {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tool-divider {
+      width: 1px;
+      height: 18px;
+      background: var(--border);
+      margin: 0 2px;
+    }
+
+    .tool-label {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-right: 2px;
+      white-space: nowrap;
+    }
+
+    .chip-btn {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-secondary);
+      font-size: 11.5px;
+      font-weight: 500;
+      padding: 4px 7px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .chip-btn:hover {
+      background: var(--surface-subtle);
+      border-color: #cbd5e1;
+    }
+
+    .chip-btn.active {
+      background: #eff6ff;
+      border-color: #3b82f6;
+      color: #1d4ed8;
+      font-weight: 600;
+    }
+
+    .chip-btn.ch1-btn.active {
+      background: var(--c-ch1-bg);
+      border-color: var(--c-ch1);
+      color: var(--c-ch1);
+    }
+
+    .chip-btn.ch2-btn.active {
+      background: var(--c-ch2-bg);
+      border-color: var(--c-ch2);
+      color: var(--c-ch2);
+    }
+
+    .chip-btn.ch3-btn.active {
+      background: var(--c-ch3-bg);
+      border-color: var(--c-ch3);
+      color: var(--c-ch3);
+    }
+    .chip-btn.ch4-btn.active {
+      background: var(--c-ch4-bg);
+      border-color: var(--c-ch4);
+      color: var(--c-ch4);
+    }
+    .chip-btn.ch5-btn.active {
+      background: var(--c-ch5-bg);
+      border-color: var(--c-ch5);
+      color: var(--c-ch5);
+    }
+
+    .chip-btn.recall-active {
+      background: #fef3c7;
+      border-color: #f59e0b;
+      color: #b45309;
+      font-weight: 700;
+    }
+
+    /* Search Box */
+    .search-wrap {
+      display: flex;
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 2px 6px;
+      gap: 4px;
+      margin-left: auto;
+    }
+
+    .search-input {
+      border: none;
+      outline: none;
+      font-size: 11.5px;
+      width: 118px;
+      color: var(--text-main);
+      background: transparent;
+      padding: 3px 2px;
+    }
+
+    .search-count {
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .icon-mini-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 11px;
+      padding: 2px 5px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .icon-mini-btn:hover {
+      background: var(--surface-subtle);
+    }
+
+    /* Main Workspace Area */
+    .workspace {
+      position: relative;
+      flex: 1;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .view-panel {
+      width: 100%;
+      height: 100%;
+      display: none;
+    }
+
+    .view-panel.active {
+      display: block;
+    }
+
+    .scroll-panel {
+      overflow-y: auto;
+      padding: 20px 16px 60px;
+      background: #f8fafc;
+    }
+
+    /* Mind Map Interactive Viewport */
+    #mapViewport {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      cursor: grab;
+      touch-action: none;
+      user-select: none;
+      background-color: var(--bg-canvas);
+      background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+
+    #mapViewport.panning {
+      cursor: grabbing;
+    }
+
+    #mapWorld {
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform-origin: 0 0;
+      will-change: transform;
+    }
+
+    #edgesSvg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    #nodesLayer {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 12000px;
+      height: 12000px;
+      pointer-events: none;
+    }
+
+    /* Mind Map Node Cards */
+    .mm-node {
+      position: absolute;
+      pointer-events: auto;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 7px 12px;
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      transition: box-shadow 0.16s ease, border-color 0.16s ease, opacity 0.2s ease;
+      user-select: text;
+      white-space: normal;
+      word-break: break-word;
+    }
+
+    .mm-node:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .mm-node.selected {
+      outline: 2.5px solid #2563eb;
+      outline-offset: 2px;
+      box-shadow: var(--shadow-lg);
+      z-index: 15;
+    }
+
+    .mm-node.search-hit {
+      outline: 2.5px solid #f59e0b;
+      outline-offset: 2px;
+      background: #fffbeb !important;
+      z-index: 14;
+    }
+
+    .mm-node.dimmed {
+      opacity: 0.24;
+    }
+
+    /* Depth-specific sizing */
+    .mm-node.depth-0 {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      border-color: #0f172a;
+      padding: 13px 18px;
+      border-radius: 14px;
+      width: 245px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .mm-node.depth-1 {
+      padding: 9px 14px;
+      border-radius: 12px;
+      border-width: 2px;
+      width: 255px;
+      font-weight: 700;
+    }
+
+    .mm-node.depth-2 {
+      width: 300px;
+      border-left-width: 4px;
+    }
+
+    .mm-node.depth-3 {
+      width: 336px;
+      border-left-width: 3.5px;
+    }
+
+    .mm-node.depth-4, .mm-node.depth-5 {
+      width: 346px;
+      padding: 7px 11px;
+      background: #ffffff;
+    }
+
+    /* Clean Xmind-style Compact Mode (Default) */
+    .compact-cards .mm-node {
+      padding: 8px 13px;
+      border-radius: 10px;
+    }
+    .compact-cards .mm-node.depth-0 {
+      width: 205px;
+      padding: 11px 15px;
+    }
+    .compact-cards .mm-node.depth-1 {
+      width: 196px;
+      padding: 8px 12px;
+    }
+    .compact-cards .mm-node.depth-2 {
+      width: 215px;
+    }
+    .compact-cards .mm-node.depth-3 {
+      width: 235px;
+    }
+    .compact-cards .mm-node.depth-4,
+    .compact-cards .mm-node.depth-5 {
+      width: 240px;
+      padding: 6px 10px;
+    }
+    .node-hook {
+      margin-top: 3px;
+      font-size: 11.5px;
+      line-height: 1.38;
+      color: #4338ca;
+      font-weight: 600;
+      transition: filter 0.18s ease;
+    }
+    .depth-0 .node-hook {
+      color: #fde68a;
+    }
+    .recall-masked .node-hook,
+    .recall-masked.compact-cards .mm-node.depth-3 .node-title {
+      filter: blur(5.5px);
+      user-select: none;
+    }
+    .recall-masked.compact-cards .mm-node.depth-3.revealed .node-title {
+      filter: none;
+      user-select: text;
+    }
+    .recall-masked .mm-node.revealed .node-hook,
+    .recall-masked .mm-node.depth-0 .node-hook {
+      filter: none;
+      user-select: text;
+    }
+
+    /* Branch color themes */
+    .mm-node.branch-1.depth-1 { background: var(--c-ch1-bg); border-color: var(--c-ch1); color: #064e3b; }
+    .mm-node.branch-1.depth-2, .mm-node.branch-1.depth-3 { border-left-color: var(--c-ch1); }
+
+    .mm-node.branch-2.depth-1 { background: var(--c-ch2-bg); border-color: var(--c-ch2); color: #1e3a8a; }
+    .mm-node.branch-2.depth-2, .mm-node.branch-2.depth-3 { border-left-color: var(--c-ch2); }
+
+    .mm-node.branch-3.depth-1 { background: var(--c-ch3-bg); border-color: var(--c-ch3); color: #4c1d95; }
+    .mm-node.branch-3.depth-2, .mm-node.branch-3.depth-3 { border-left-color: var(--c-ch3); }
+    .mm-node.branch-4.depth-1 { background: var(--c-ch4-bg); border-color: var(--c-ch4); color: #164e63; }
+    .mm-node.branch-4.depth-2, .mm-node.branch-4.depth-3 { border-left-color: var(--c-ch4); }
+    .mm-node.branch-5.depth-1 { background: var(--c-ch5-bg); border-color: var(--c-ch5); color: #881337; }
+    .mm-node.branch-5.depth-2, .mm-node.branch-5.depth-3 { border-left-color: var(--c-ch5); }
+
+    .mm-node.is-supp {
+      background: #fffdf7;
+      border-color: var(--c-supp-bd);
+      border-left: 4px solid var(--c-supp) !important;
+    }
+
+    .mm-node.is-warn {
+      background: #fffafa;
+      border-color: var(--c-warn-bd);
+      border-left: 4px solid var(--c-warn) !important;
+    }
+
+    .node-badges {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+
+    .badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 4px;
+      line-height: 1.35;
+      white-space: nowrap;
+    }
+
+    .badge-star3 { background: #fee2e2; color: #b91c1c; }
+    .badge-star2 { background: #fef3c7; color: #b45309; }
+    .badge-star1 { background: #e2e8f0; color: #475569; }
+    .badge-page { background: #f1f5f9; color: #475569; font-weight: 600; }
+    .badge-supp { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+    .badge-warn { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+    .badge-mnem { background: #e0e7ff; color: #3730a3; }
+
+    .depth-0 .badge-page {
+      background: rgba(255, 255, 255, 0.16);
+      color: #e2e8f0;
+    }
+
+    .node-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      line-height: 1.4;
+      color: inherit;
+    }
+
+    .depth-0 .node-title {
+      font-size: 16px;
+      letter-spacing: 0.3px;
+    }
+
+    .depth-1 .node-title {
+      font-size: 14.5px;
+    }
+
+    .node-summary {
+      margin-top: 4px;
+      font-size: 12px;
+      line-height: 1.48;
+      color: var(--text-secondary);
+      font-weight: 400;
+      transition: filter 0.18s ease;
+    }
+
+    .depth-0 .node-summary {
+      color: #cbd5e1;
+      font-size: 12px;
+    }
+
+    .node-summary strong {
+      color: #0f172a;
+      font-weight: 700;
+      background: rgba(250, 204, 21, 0.22);
+      padding: 0 2px;
+      border-radius: 2px;
+    }
+
+    .depth-0 .node-summary strong {
+      color: #fde68a;
+      background: transparent;
+    }
+
+    /* Active Recall Blur Mode */
+    .recall-masked .node-summary {
+      filter: blur(5.5px);
+      user-select: none;
+    }
+
+    .recall-masked .mm-node.revealed .node-summary,
+    .recall-masked .mm-node.depth-0 .node-summary {
+      filter: none;
+      user-select: text;
+    }
+
+    /* Expand / Collapse Toggle Pill on Right Edge */
+    .toggle-pill {
+      position: absolute;
+      right: -13px;
+      top: 50%;
+      transform: translateY(-50%);
+      min-width: 24px;
+      height: 22px;
+      padding: 0 5px;
+      border-radius: 999px;
+      border: 1.5px solid #94a3b8;
+      background: #ffffff;
+      color: #334155;
+      font-size: 11px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 5;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.12);
+      transition: all 0.15s ease;
+    }
+
+    .toggle-pill:hover {
+      background: #0f172a;
+      color: #ffffff;
+      border-color: #0f172a;
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .toggle-pill.collapsed {
+      background: #eff6ff;
+      border-color: #2563eb;
+      color: #1d4ed8;
+    }
+
+    /* Floating Zoom & Navigation Bar */
+    .zoom-dock {
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 5px 8px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: var(--shadow-md);
+      z-index: 25;
+    }
+
+    .dock-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 5px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .dock-btn:hover {
+      background: var(--surface-subtle);
+      color: var(--text-main);
+    }
+
+    .zoom-readout {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-main);
+      min-width: 44px;
+      text-align: center;
+    }
+
+    /* Legend & Help Pill */
+    .legend-bar {
+      position: absolute;
+      left: 14px;
+      top: 12px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(6px);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 5px 10px;
+      font-size: 11.5px;
+      color: var(--text-secondary);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      box-shadow: var(--shadow-sm);
+      z-index: 20;
+      max-width: calc(100% - 28px);
+    }
+
+    .legend-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 3px;
+    }
+
+    /* Minimap (Collapsible so it never covers leaf cards) */
+    .minimap-box {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      width: 176px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(6px);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      z-index: 24;
+      transition: width 0.18s ease, height 0.18s ease;
+    }
+    .minimap-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 3px 8px;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      background: rgba(248, 250, 252, 0.92);
+      cursor: pointer;
+      user-select: none;
+    }
+    .minimap-box canvas {
+      display: block;
+      width: 176px;
+      height: 104px;
+      cursor: crosshair;
+    }
+    .minimap-box.minimized {
+      width: auto;
+    }
+    .minimap-box.minimized .minimap-head {
+      border-bottom: none;
+      padding: 5px 10px;
+    }
+    .minimap-box.minimized canvas {
+      display: none;
+    }
+
+    .drawer-grabber {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .top-header {
+        padding: 6px 10px;
+        gap: 6px;
+        flex-wrap: nowrap;
+      }
+      .brand-badge {
+        font-size: 12px;
+        padding: 4px 8px;
+      }
+      .mode-tabs {
+        padding: 2px;
+        gap: 2px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .mode-tabs::-webkit-scrollbar {
+        display: none;
+      }
+      .mode-tab {
+        font-size: 11.5px;
+        padding: 5px 8px;
+      }
+
+      /* Single-row horizontal swipe toolbar on mobile so map gets maximum screen height */
+      .sub-toolbar {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding: 6px 10px;
+        gap: 6px;
+      }
+      .sub-toolbar::-webkit-scrollbar {
+        display: none;
+      }
+      .tool-group {
+        flex-wrap: nowrap;
+        flex-shrink: 0;
+      }
+      .tool-divider {
+        flex-shrink: 0;
+      }
+      .chip-btn {
+        padding: 5px 9px;
+        font-size: 12px;
+        flex-shrink: 0;
+      }
+      .search-wrap {
+        flex-shrink: 0;
+        margin-left: 2px;
+      }
+      .search-input {
+        width: 115px;
+        font-size: 12px;
+      }
+
+      /* Compact top legend & safe-area bottom zoom dock */
+      .minimap-box {
+        display: none;
+      }
+      .legend-bar {
+        left: 8px;
+        top: 8px;
+        max-width: calc(100% - 16px);
+        font-size: 10.5px;
+        padding: 4px 8px;
+        gap: 5px;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        scrollbar-width: none;
+      }
+      .legend-bar::-webkit-scrollbar {
+        display: none;
+      }
+      .zoom-dock {
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+        padding: 5px 10px;
+        border-radius: 999px;
+        gap: 4px;
+      }
+      .dock-btn {
+        padding: 6px 9px;
+        font-size: 13px;
+      }
+
+      /* Larger touch targets for branch expand/collapse pills on mobile */
+      .toggle-pill {
+        min-width: 28px;
+        height: 26px;
+        right: -15px;
+        font-size: 12px;
+      }
+
+      /* iOS / Android Bottom-Sheet Detail Drawer on Mobile */
+      .detail-drawer {
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-width: 100%;
+        height: 62vh;
+        height: 62dvh;
+        border-left: none;
+        border-top: 1px solid var(--border);
+        border-radius: 18px 18px 0 0;
+        box-shadow: 0 -10px 32px rgba(15, 23, 42, 0.16);
+        transform: translateY(105%);
+      }
+      .detail-drawer.open {
+        transform: translateY(0);
+      }
+      .drawer-grabber {
+        display: block;
+        width: 38px;
+        height: 4px;
+        background: #cbd5e1;
+        border-radius: 999px;
+        margin: 8px auto 0;
+        flex-shrink: 0;
+      }
+      .drawer-header {
+        padding: 10px 14px;
+      }
+      .drawer-body {
+        padding: 12px 14px calc(18px + env(safe-area-inset-bottom, 8px));
+      }
+
+      /* Mobile-friendly scroll panels & sticky table first column */
+      .scroll-panel {
+        padding: 12px 10px calc(36px + env(safe-area-inset-bottom, 12px));
+        -webkit-overflow-scrolling: touch;
+      }
+      .card-block {
+        padding: 14px 12px;
+      }
+      table.cmp-table th:first-child,
+      table.cmp-table td:first-child {
+        position: sticky;
+        left: 0;
+        z-index: 2;
+        background: #f8fafc;
+        min-width: 84px;
+        max-width: 110px;
+      }
+      table.cmp-table th:first-child {
+        background: #e2e8f0;
+        z-index: 3;
+      }
+      .quiz-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Right Detail Drawer */
+    .detail-drawer {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 380px;
+      max-width: 92vw;
+      height: 100%;
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      box-shadow: -8px 0 28px rgba(15, 23, 42, 0.10);
+      z-index: 30;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .detail-drawer.open {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      background: #fcfdff;
+    }
+
+    .drawer-close {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-secondary);
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .drawer-close:hover {
+      background: var(--surface-subtle);
+    }
+
+    .drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .drawer-section {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 11px 13px;
+    }
+
+    .drawer-section.supp-box {
+      background: var(--c-supp-bg);
+      border-color: var(--c-supp-bd);
+    }
+
+    .drawer-section.warn-box {
+      background: var(--c-warn-bg);
+      border-color: var(--c-warn-bd);
+    }
+
+    .drawer-sec-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .drawer-list {
+      padding-left: 17px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .drawer-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: #1d4ed8;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 12.5px;
+      margin-top: 4px;
+    }
+
+    .drawer-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Tables View & Quiz View */
+    .container-narrow {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .card-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-block h2 {
+      font-size: 16px;
+      margin-bottom: 6px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-block p.desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .table-scroll {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table.cmp-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+      line-height: 1.55;
+    }
+
+    table.cmp-table th, table.cmp-table td {
+      border: 1px solid var(--border);
+      padding: 9px 11px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    table.cmp-table th {
+      background: #f1f5f9;
+      font-weight: 700;
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    table.cmp-table tr:nth-child(even) td {
+      background: #fcfdff;
+    }
+
+    /* Flashcard Quiz View */
+    .quiz-stats-bar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .progress-track {
+      flex: 1;
+      min-width: 180px;
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #10b981, #059669);
+      width: 0%;
+      transition: width 0.25s ease;
+    }
+
+    .quiz-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 14px;
+    }
+
+    .quiz-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 15px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.15s ease;
+    }
+
+    .quiz-card.mastered {
+      border-color: #10b981;
+      background: #f0fdf4;
+    }
+
+    .quiz-q {
+      font-size: 13.5px;
+      font-weight: 700;
+      line-height: 1.5;
+      color: var(--text-main);
+    }
+
+    .quiz-ans {
+      font-size: 12.5px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      background: #f8fafc;
+      border-left: 3px solid #2563eb;
+      padding: 9px 11px;
+      border-radius: 6px;
+      display: none;
+    }
+
+    .quiz-card.show-ans .quiz-ans {
+      display: block;
+    }
+
+    .quiz-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Top Primary Bar -->
+    <header class="top-header">
+      <div class="brand-group">
+        <span class="brand-badge">管理学原理 · 期末复习导图</span>
+        <span class="brand-sub">马工程教材 × 五大章节课件原文融合 × 高频考点与易混辨析</span>
+      </div>
+      <nav class="mode-tabs" aria-label="复习模式切换">
+        <button type="button" class="mode-tab active" data-mode="map" id="tabMap">🗺️ 交互思维导图</button>
+        <button type="button" class="mode-tab" data-mode="tables" id="tabTables">📊 七大必考对比表</button>
+        <button type="button" class="mode-tab" data-mode="quiz" id="tabQuiz">🎯 考前自测14问</button>
+      </nav>
+    </header>
+
+    <!-- Mind Map Interactive Controls Sub-Toolbar -->
+    <div class="sub-toolbar" id="mapToolbar">
+      <div class="tool-group">
+        <span class="tool-label">篇章聚焦:</span>
+        <button type="button" class="chip-btn active" data-focus="root">全景总览</button>
+        <button type="button" class="chip-btn ch1-btn" data-focus="ch1">一·管理导论</button>
+        <button type="button" class="chip-btn ch2-btn" data-focus="ch2">二·理论演变</button>
+        <button type="button" class="chip-btn ch3-btn" data-focus="ch3">三·环境与战略</button>
+        <button type="button" class="chip-btn ch4-btn" data-focus="ch4">四·决策章节</button>
+        <button type="button" class="chip-btn ch5-btn" data-focus="ch5">五·计划章节</button>
+      </div>
+
+      <div class="tool-divider"></div>
+
+      <div class="tool-group">
+        <span class="tool-label">层级:</span>
+        <button type="button" class="chip-btn" data-depth="1">1级</button>
+        <button type="button" class="chip-btn active" data-depth="2">2级(模块)</button>
+        <button type="button" class="chip-btn" data-depth="3">3级(考点)</button>
+        <button type="button" class="chip-btn" data-depth="9">全展开</button>
+      </div>
+
+      <div class="tool-divider"></div>
+
+      <div class="tool-group">
+        <span class="tool-label">筛选:</span>
+        <button type="button" class="chip-btn active" data-filter="all">全部</button>
+        <button type="button" class="chip-btn" data-filter="star3">🔥必背★★★</button>
+        <button type="button" class="chip-btn" data-filter="supp">💡补充/辨析</button>
+      </div>
+
+      <div class="tool-divider"></div>
+
+      <button type="button" class="chip-btn active" id="btnCardDensity" title="切换清爽导图节点（仅标题+口诀）或详细摘要卡片">✨ 极简骨架</button>
+      <button type="button" class="chip-btn" id="btnRecallMask" title="模糊隐藏口诀与细节，点击卡片逐个揭晓自测">🙈 背诵遮罩</button>
+
+      <div class="search-wrap">
+        <input type="text" id="searchInput" class="search-input" placeholder="搜考点: 法约尔 / 五力 / 西蒙..." aria-label="搜索思维导图节点" />
+        <span class="search-count" id="searchCount"></span>
+        <button type="button" class="icon-mini-btn" id="btnSearchPrev" title="上一个匹配">▲</button>
+        <button type="button" class="icon-mini-btn" id="btnSearchNext" title="下一个匹配">▼</button>
+        <button type="button" class="icon-mini-btn" id="btnSearchClear" title="清空搜索">×</button>
+      </div>
+    </div>
+
+    <!-- Main Workspace -->
+    <main class="workspace">
+      <!-- PANEL 1: Interactive Zoomable/Pannable Mind Map -->
+      <section class="view-panel active" id="panelMap">
+        <div id="mapViewport">
+          <!-- Quick Legend -->
+          <div class="legend-bar">
+            <span><i class="legend-dot" style="background:#059669"></i>导论</span>
+            <span><i class="legend-dot" style="background:#2563eb"></i>理论演变</span>
+            <span><i class="legend-dot" style="background:#7c3aed"></i>环境与战略</span>
+            <span><i class="legend-dot" style="background:#0891b2"></i>决策章节</span>
+            <span><i class="legend-dot" style="background:#e11d48"></i>计划章节</span>
+            <span class="badge badge-supp">💡补充考点</span>
+            <span class="badge badge-warn">⚠️易混辨析</span>
+            <span style="color:#64748b">滚轮缩放 · 按住拖拽 · 点卡片看原文详情 · 点右侧数字展开分支</span>
+          </div>
+
+          <!-- Transformable World -->
+          <div id="mapWorld">
+            <svg id="edgesSvg"></svg>
+            <div id="nodesLayer"></div>
+          </div>
+
+          <!-- Bottom-Left Floating Zoom Dock -->
+          <div class="zoom-dock">
+            <button type="button" class="dock-btn" id="btnZoomOut" title="缩小 (-)">−</button>
+            <span class="zoom-readout" id="zoomReadout">100%</span>
+            <button type="button" class="dock-btn" id="btnZoomIn" title="放大 (+)">+</button>
+            <div class="tool-divider"></div>
+            <button type="button" class="dock-btn" id="btnZoomReset" title="重置为100%比例">1:1</button>
+            <button type="button" class="dock-btn" id="btnZoomFit" title="自动缩放适应当前屏幕 (0)">适应屏幕</button>
+          </div>
+
+          <!-- Bottom-Right Interactive Minimap -->
+          <div class="minimap-box" id="minimapBox" title="点击小地图任意位置快速跳转">
+            <div class="minimap-head" id="btnToggleMinimap" title="展开或收起右下角缩略图">
+              <span>导图缩略导航</span>
+              <span id="minimapToggleIcon">▾</span>
+            </div>
+            <canvas id="minimapCanvas" width="176" height="104"></canvas>
+          </div>
+        </div>
+
+        <!-- Right-Side / Mobile Bottom-Sheet Node Detail Drawer -->
+        <aside class="detail-drawer" id="detailDrawer" aria-label="考点详情面板">
+          <div class="drawer-grabber" id="drawerGrabber"></div>
+          <div class="drawer-header" id="drawerHeader">
+            <div>
+              <div class="node-badges" id="drawerBadges"></div>
+              <h3 id="drawerTitle" style="font-size:15.5px; line-height:1.4; color:#0f172a;">考点详情</h3>
+            </div>
+            <button type="button" class="drawer-close" id="btnCloseDrawer" title="关闭详情">×</button>
+          </div>
+          <div class="drawer-body" id="drawerBody"></div>
+        </aside>
+      </section>
+
+      <!-- PANEL 2: 5 High-Yield Exam Comparison Tables -->
+      <section class="view-panel scroll-panel" id="panelTables">
+        <div class="container-narrow">
+          <div class="card-block">
+            <h2>📌 表1：三大古典管理理论异同总览〔演变P18-19〕</h2>
+            <p class="desc">三大理论共同基于“经济人”假设与“效率最大化”目标，主张用科学代替经验、推进管理专业化与职业化，但研究层次截然不同：</p>
+            <div class="table-scroll">
+              <table class="cmp-table">
+                <thead>
+                  <tr>
+                    <th>对比维度</th>
+                    <th>泰勒（科学管理理论 / 泰勒制）</th>
+                    <th>法约尔（一般管理理论）</th>
+                    <th>韦伯（官僚组织 / 科层制理论）</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>尊称与著作</strong></td>
+                    <td><strong>科学管理之父</strong> · 《科学管理原理》(1911)</td>
+                    <td><strong>现代管理之父</strong> · 《工业管理与一般管理》(1916)</td>
+                    <td><strong>组织理论之父</strong> · 《社会和经济组织的理论》</td>
+                  </tr>
+                  <tr>
+                    <td><strong>效率侧重层次</strong></td>
+                    <td><strong>个体效率</strong>（车间生产作业效率）</td>
+                    <td><strong>企业组织效率</strong>（整体经营与管理过程）</td>
+                    <td><strong>社会组织效率</strong>（宏观理想行政体系）</td>
+                  </tr>
+                  <tr>
+                    <td><strong>核心理论抓手</strong></td>
+                    <td>工作定额、标准化、一流工人(能力+意愿)、差别计件工资、计划与执行分离、例外原则</td>
+                    <td>区别经营六职能与管理五职能（计划/组织/指挥/协调/控制）、十四条管理原则、法约尔桥</td>
+                    <td>三种合法权力（<strong>法理型权力</strong>是科层制唯一基础）、官僚制六大特征（分层选规非职）</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card-block">
+            <h2>⚠️ 表2：【重点补充辨析】法约尔“统一指挥” vs “统一领导（统一指导）”</h2>
+            <p class="desc">期末高频选择/判断/辨析考题（源自《工业管理与一般管理》十四条原则第4、5条）：</p>
+            <div class="table-scroll">
+              <table class="cmp-table">
+                <thead>
+                  <tr>
+                    <th>辨析维度</th>
+                    <th>统一指挥（Unity of Command）</th>
+                    <th>统一领导 / 统一指导（Unity of Direction）</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>针对对象</strong></td>
+                    <td><strong>管“人”（针对下属个体）</strong></td>
+                    <td><strong>管“事”（针对同一目标的全部活动）</strong></td>
+                  </tr>
+                  <tr>
+                    <td><strong>核心定义</strong></td>
+                    <td><strong>一个下属人员只能接受一个直接上级的命令</strong>（一人一上司）</td>
+                    <td><strong>力求达到同一目的的全部活动，只能有一个领导人和一项计划</strong>（一事一头一计划）</td>
+                  </tr>
+                  <tr>
+                    <td><strong>作用层面</strong></td>
+                    <td>组织机构建立之后的<strong>日常人事运转与指令执行</strong>问题</td>
+                    <td><strong>组织机构设置、部门划分与业务计划协调</strong>问题</td>
+                  </tr>
+                  <tr>
+                    <td><strong>违背反例</strong></td>
+                    <td>泰勒“八职能工长制”多头下令；两个副总对同一员工发出冲突指令；矩阵制双重汇报冲突</td>
+                    <td>公司针对同一产品线设两个互不统属的营销部、各搞一套冲突方案（政出多门）</td>
+                  </tr>
+                  <tr>
+                    <td><strong>逻辑关系</strong></td>
+                    <td colspan="2"><strong>统一领导是统一指挥的组织前提，但仅有统一领导不能自动保证统一指挥</strong>（即使机构只有一套计划，若上司越级交叉发令仍会破坏统一指挥）。</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card-block">
+            <h2>🧠 表3：行为科学四种人性假设全景对比〔演变P22-26〕</h2>
+            <p class="desc">演进脉络：传统模式 → 人际关系模式 → 人力资源模式〔演变P21〕。注意区分“沙因提复杂人、莫尔斯和洛什提超Y理论”！</p>
+            <div class="table-scroll">
+              <table class="cmp-table">
+                <thead>
+                  <tr>
+                    <th>人性假设</th>
+                    <th>对应理论及学者</th>
+                    <th>核心人性观点（课件原文提炼）</th>
+                    <th>匹配管理方式</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>经济人假设</strong></td>
+                    <td><strong>X理论</strong>（麦格雷戈概括传统观点）</td>
+                    <td>追求个人利益最大化，自利本性不变；假定人性丑恶，厌恶工作、逃避责任、贪图享乐安全</td>
+                    <td>金钱报酬刺激＋严密监督与规章惩罚</td>
+                  </tr>
+                  <tr>
+                    <td><strong>社会人假设</strong></td>
+                    <td><strong>人际关系学说</strong>（梅奥·霍桑实验）</td>
+                    <td>人更具社会性需求，<strong>人际关系和组织归属感比经济报酬更能激励行为</strong>；重视同事社会影响力</td>
+                    <td>倾听沟通、提高满意度、善待非正式组织</td>
+                  </tr>
+                  <tr>
+                    <td><strong>自我实现人假设</strong></td>
+                    <td><strong>Y理论</strong>（马斯洛 → 麦格雷戈）</td>
+                    <td>假定人性本善，乐于工作，能<strong>自我指导和自我控制</strong>，主动寻求责任；个人自我实现与组织目标无冲突</td>
+                    <td>营造良好环境、授权参与、目标管理与内在激励</td>
+                  </tr>
+                  <tr>
+                    <td><strong>复杂人假设</strong></td>
+                    <td><strong>超Y理论</strong>（<strong>沙因</strong>提复杂人；<strong>莫尔斯和洛什</strong>提超Y理论）</td>
+                    <td>需求因人因时因境而异：<strong>主体需要的差异性、组织方式的相异性、控制程度的应变性、目标确立的递进性</strong></td>
+                    <td>权变管理（因人因事制宜调整组织与控制）</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card-block">
+            <h2>VS  表4：波特三大基本竞争战略对比〔环境P30-41〕</h2>
+            <p class="desc">共同目的：获得<strong>高于行业平均利润</strong>。特别留意“成本领先”与“差别化”各自的判断题陷阱！</p>
+            <div class="table-scroll">
+              <table class="cmp-table">
+                <thead>
+                  <tr>
+                    <th>竞争战略</th>
+                    <th>核心界定与代表案例</th>
+                    <th>必考判断题注意事项 / 实施基础</th>
+                    <th>核心优势与主要风险/误区</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>成本领先战略</strong></td>
+                    <td>努力使企业某项业务成为<strong>行业内所有竞争者中成本最低者</strong>（规模生产+经验曲线+严控费用；戴尔、宜家）</td>
+                    <td>1. 是成为行业<strong>成本最低</strong>，而非仅努力降本；<br>2. 产品必须标准，<strong>至少不应被顾客认为是低档次的</strong>〔环境P32〕</td>
+                    <td><strong>优势</strong>：全面抵御五种竞争力量；<br><strong>风险</strong>：后来者居上、技术进步削弱效用、丧失市场敏锐度、受外部影响大</td>
+                  </tr>
+                  <tr>
+                    <td><strong>差别化战略</strong></td>
+                    <td>通过<strong>提高顾客效用来提高顾客价值</strong>，提供独特产品/方式使顾客愿付溢价（如IBM品质服务）</td>
+                    <td>有差别的产品服务<strong>不一定就是差别化战略</strong>，还<strong>必须能够获得高于行业平均水平的溢价</strong>〔环境P37〕</td>
+                    <td><strong>优势</strong>：建立<strong>顾客忠诚度</strong>；<br><strong>误区</strong>：无价值的独特性、过度差异化、定价过高、忽视价值信号、只重产品轻价值链</td>
+                  </tr>
+                  <tr>
+                    <td><strong>集中化战略</strong></td>
+                    <td>受<strong>企业资源和能力约束</strong>边界条件下的<strong>折衷战略</strong>，聚焦特定顾客群、产品或小地理市场</td>
+                    <td><strong>企业基础</strong>：服务小市场成本更低或提供更好东西；<br><strong>市场基础</strong>：需求独特专业、足够大可盈利、未被大对手关注〔环境P41〕</td>
+                    <td><strong>优势</strong>：中小企业在细分利基市场避开正面硬碰硬，获取超额利润</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card-block">
+            <h2>🎲 表5：环境不确定性四象限〔环境P43〕与三类决策模式对比〔环境P45-47〕</h2>
+            <p class="desc">不确定性排序必考陷阱：<strong>简单+不稳定（Ⅲ：高中度）＞ 复杂+稳定（Ⅱ：低中度）</strong>，因为动态不可预测比要素繁多影响更大！</p>
+            <div class="table-scroll">
+              <table class="cmp-table">
+                <thead>
+                  <tr>
+                    <th>决策模式</th>
+                    <th>人性与理性前提</th>
+                    <th>决策准则与核心内容（课件原文）</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>古典决策理论（科学/理性决策）</strong></td>
+                    <td><strong>“经济人”完全理性假设</strong></td>
+                    <td>追求<strong>最优化（组织利益最大化）</strong>：全面掌握环境信息、充分了解全部备选方案、建立合理层级保证执行、始终获取最大经济效益〔环境P45〕</td>
+                  </tr>
+                  <tr>
+                    <td><strong>西蒙行为决策理论（有限理性）</strong></td>
+                    <td><strong>“有限理性”管理人假设</strong>（知识/预见/设计能力有限）</td>
+                    <td>以<strong>“令人满意的”准则</strong>代替“最优化”：1.人是有限理性的；2.易受知觉偏差影响；3.选择的理性是相对的；4.<strong>相比经济利益更在意决策风险</strong>；5.只求相对满意结果〔环境P46〕</td>
+                  </tr>
+                  <tr>
+                    <td><strong>非理性决策</strong></td>
+                    <td>个人情绪与主观偏好驱动</td>
+                    <td>随意的、无目的的决策，不考虑对组织的影响，凭个人爱好或一时喜怒哀乐行事（警句：“激动时不做任何决策”）〔环境P47〕</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card-block">
+            <h2>💡 表6：【决策章节必辨】头脑风暴法 vs 名义小组技术 vs 德尔菲法</h2>
+            <p class="desc">马工程《管理学》三大定性群体决策方法核心差异对比（简答与单选高频）：</p>
+            <div class="table-scroll">
+              <table class="cmp-table">
+                <thead>
+                  <tr>
+                    <th>比较维度</th>
+                    <th>头脑风暴法（奥斯本）</th>
+                    <th>名义小组技术（NGT）</th>
+                    <th>德尔菲法（专家调查法）</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>沟通方式</strong></td>
+                    <td>成员<strong>面对面围坐</strong>，开放口头自由联想</td>
+                    <td>成员<strong>到场但前段互不通气</strong>，独立写方案</td>
+                    <td>专家<strong>不到场、匿名背靠背</strong>函询，禁横向联系</td>
+                  </tr>
+                  <tr>
+                    <td><strong>核心规则</strong></td>
+                    <td>四原则：追求数量、<strong>禁止批评</strong>、提倡独特、综合改善</td>
+                    <td>独立书面写方案 → 轮流陈述记录 → <strong>独立投票排序</strong></td>
+                    <td>设计问卷 → 匿名作答 → <strong>3~4轮汇总反馈统计收敛</strong></td>
+                  </tr>
+                  <tr>
+                    <td><strong>适用场景</strong></td>
+                    <td>快速激发新奇创意（易受权威干扰）</td>
+                    <td>防止少数健谈者主导会议，保障话语权均等</td>
+                    <td>彻底消除权威压力与从众心理，适于重大战略预测</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card-block">
+            <h2>📋 表7：【计划章节必辨】决策与计划 · 三层计划 · 预算分类对比〔计划P8-13〕</h2>
+            <p class="desc">涵盖〔计划章节〕核心概念分界与第五章预算/追踪高频辨析：</p>
+            <div class="table-scroll">
+              <table class="cmp-table">
+                <thead>
+                  <tr>
+                    <th>对比组别</th>
+                    <th>概念 A</th>
+                    <th>概念 B（及 C）</th>
+                    <th>考场秒杀区分采分点</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>首要职能分界</strong></td>
+                    <td><strong>决策</strong>（管理首要职能）</td>
+                    <td><strong>计划</strong>（决策的逻辑延续）</td>
+                    <td>决策答<strong>“做什么、选方向”</strong>（前提依据）；计划答<strong>“怎么做、何时做、谁来做”</strong>（实施保证），且计划中层层含决策〔计划P8/P10〕</td>
+                  </tr>
+                  <tr>
+                    <td><strong>纵向三层计划</strong></td>
+                    <td><strong>战略计划</strong>（高层·长期）</td>
+                    <td><strong>战术计划</strong>（中层） / <strong>作业计划</strong>（基层）</td>
+                    <td>战略抽象广博、设目标本身是主要任务；战术具体可操作；作业具<strong>个体性、可重复性与强刚性</strong>〔计划P13〕</td>
+                  </tr>
+                  <tr>
+                    <td><strong>环境明确度</strong></td>
+                    <td><strong>具体性计划</strong></td>
+                    <td><strong>指导性计划</strong></td>
+                    <td>具体性计划目标精确无歧义（宜稳定环境）；指导性计划只定大方向准则、富弹性（宜<strong>高度不确定环境</strong>）</td>
+                  </tr>
+                  <tr>
+                    <td><strong>预算编制与控制</strong></td>
+                    <td><strong>刚性预算 / 传统增量预算</strong></td>
+                    <td><strong>弹性预算 / 零基预算（ZBB）</strong></td>
+                    <td>刚性无变动余地 vs 弹性随业务量伸缩；增量“基数+增长”易固化 vs <strong>零基一律从零重审优先级</strong>（科学但工作量大）</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PANEL 3: Active Recall 10 Exam Questions -->
+      <section class="view-panel scroll-panel" id="panelQuiz">
+        <div class="container-narrow">
+          <div class="quiz-stats-bar">
+            <div>
+              <strong style="font-size:15px;">🎯 考前闭眼默写 14 问（全五章主动回忆训练）</strong>
+              <p style="font-size:12px; color:#64748b; margin-top:2px;">先在脑中背出框架关键词，再点击“查看采分点”核对，答对后标记“已掌握”。</p>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" id="quizProgressFill"></div>
+            </div>
+            <span id="quizProgressText" style="font-size:13px; font-weight:700; color:#059669;">已掌握 0 / 14</span>
+            <button type="button" class="chip-btn" id="btnResetQuiz">重置进度</button>
+          </div>
+
+          <div class="quiz-grid" id="quizGrid"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 1. 完整结构化知识库（100% 融合三份课件原文 + 显式标注课外高频考点与辨析）
+    // =========================================================================
+    const MINDMAP_DATA = {
+      id: "root",
+      title: "管理学原理 · 宏观框架导图",
+      summary: "中心议题：管理者如何有效管理其组织",
+      page: "导论P38 / 演变P36",
+      star: 3,
+      mnemonic: "导论 · 演变 · 环境 · 决策 · 计划（五大篇章）",
+      detail: [
+        "定位分工：本思维导图专为「3分钟搭全书骨架＋记关键词口诀」精简瘦身；完整课件原句、14条原则逐条解释与长篇辨析请配合《期末复习详细提纲.pdf》背诵。",
+        "已减负：剔除导论非考点导学页与〔环境P42〕注明不考的情境分析法。"
+      ],
+      children: [
+        // ==================== 第一篇：管理导论 ====================
+        {
+          id: "ch1",
+          branch: 1,
+          title: "一、管理导论",
+          page: "导论课件",
+          star: 3,
+          mnemonic: "载体 · 概念 · 职能 · 管理者 · 原理工具",
+          detail: [
+            "主线：为什么需要管理(组织载体) → 管理是什么(概念与属性) → 管什么(职能) → 谁来管(管理者) → 靠什么管(原理·方法·工具)。"
+          ],
+          children: [
+            {
+              id: "ch1_1",
+              branch: 1,
+              title: "1.1 产生与组织载体",
+              page: "导论P11-23",
+              star: 2,
+              mnemonic: "无限欲望×有限资源 → 协调",
+              detail: [
+                "根本矛盾：欲望无限性与资源有限性 → 协调〔导论P21〕",
+                "组织三特征：两个以上成员、共同目标、系统化结构〔导论P12〕",
+                "组织三要素：领导发起、共同协作意愿、广泛信息沟通〔导论P13〕",
+                "功能与要点：分工+协作克服个人局限；定位·激励·规范〔导论P15-16〕"
+              ],
+              children: [
+                {
+                  id: "ch1_1_1",
+                  branch: 1,
+                  title: "组织三特征与三要素",
+                  page: "导论P12-14",
+                  star: 2,
+                  mnemonic: "成员·目标·结构｜发起·意愿·沟通",
+                  detail: [
+                    "三特征：两个以上成员 + 共同目标 + 系统化分工协作结构",
+                    "三要素：领导人发起 + 共同协作意愿 + 广泛信息沟通"
+                  ]
+                },
+                {
+                  id: "ch1_1_2",
+                  branch: 1,
+                  title: "分工协作与管理三要点",
+                  page: "导论P15-17",
+                  star: 1,
+                  mnemonic: "定位 · 激励 · 规范",
+                  detail: [
+                    "功能：克服个人力量局限性（手段：分工+协作）",
+                    "管理三要点：定位(价值观目标)、激励(调动能动性)、规范(建立信任)"
+                  ]
+                }
+              ]
+            },
+            {
+              id: "ch1_2",
+              branch: 1,
+              title: "1.2 概念·实质·二重性",
+              page: "导论P24-32, P57-59",
+              star: 3,
+              mnemonic: "五维：目·本(协调)·主·客·过",
+              detail: [
+                "综合定义：决策、组织、领导、控制并不断创新的过程〔导论P31〕",
+                "管理的本质：对人的行为进行协调〔导论P57〕"
+              ],
+              children: [
+                {
+                  id: "ch1_2_1",
+                  branch: 1,
+                  title: "五学者定义演进",
+                  page: "导论P28-30",
+                  star: 2,
+                  mnemonic: "泰省·法五·孔环·西决·罗人",
+                  detail: [
+                    "1911泰勒(最好最节约方法) → 1916法约尔(五职能) → 1955孔茨(良好环境) → 1960西蒙(管理就是决策) → 1996罗宾斯(通过他人完成)"
+                  ]
+                },
+                {
+                  id: "ch1_2_2",
+                  branch: 1,
+                  title: "综合定义五维拆解",
+                  page: "导论P31-32",
+                  star: 3,
+                  mnemonic: "目·本(协调)·主·客(人财物信时)·过",
+                  detail: [
+                    "目的(实现目标)、本质(协调人的行为)、主体(管理者)、客体(人财物信息时间等)、过程(五大职能)"
+                  ]
+                },
+                {
+                  id: "ch1_2_3",
+                  branch: 1,
+                  type: "warn",
+                  title: "效率 vs 效果 vs 效益",
+                  page: "导论P25, P49",
+                  star: 3,
+                  mnemonic: "效率重方法 · 效果重目标",
+                  detail: [
+                    "效率=正确方法做事(低浪费)；效果=实现目标程度；效益=正确方法做正确的事",
+                    "防坑：优先背原句“既要讲效率，又要讲效果”（详见提纲PDF 1.2节）"
+                  ]
+                },
+                {
+                  id: "ch1_2_4",
+                  branch: 1,
+                  type: "warn",
+                  title: "科学×艺术｜自然×社会属性",
+                  page: "导论P58-59",
+                  star: 3,
+                  mnemonic: "自然联生产力 · 社会联生产关系",
+                  detail: [
+                    "科学性(客观规律理论) × 艺术性(实践灵活技巧)",
+                    "自然属性(生产力/大生产通用技术) × 社会属性(生产关系/所有制监督)"
+                  ]
+                }
+              ]
+            },
+            {
+              id: "ch1_3",
+              branch: 1,
+              title: "1.3 管理的五大职能",
+              page: "导论P46-49",
+              star: 3,
+              mnemonic: "决策·组织·领导·控制＋创新",
+              detail: [
+                "法约尔五职能(计组指协控) → 本书五职能：计划(决策)、组织、领导、控制、创新"
+              ],
+              children: [
+                {
+                  id: "ch1_3_1",
+                  branch: 1,
+                  title: "四大职能各自着眼点",
+                  page: "导论P48",
+                  star: 3,
+                  mnemonic: "决配资源·组分工·领积极·控纠偏",
+                  detail: [
+                    "决策(计划)：有限资源合理配置｜组织：合理分工与明确协作",
+                    "领导：调动积极性与把握方向｜控制：检查监督与着力纠偏"
+                  ]
+                }
+              ]
+            },
+            {
+              id: "ch1_4",
+              branch: 1,
+              title: "1.4 管理者(层·角·技)",
+              page: "导论P51-56",
+              star: 3,
+              mnemonic: "3层 · 3类10角色 · 卡茨3技能",
+              detail: [
+                "判断标准：正式头衔、履行管理职能、有直接下属〔导论P51〕",
+                "纵向三层：高层(定战略方向) · 中层(贯彻协调) · 基层(指挥一线)"
+              ],
+              children: [
+                {
+                  id: "ch1_4_1",
+                  branch: 1,
+                  type: "warn",
+                  title: "明茨伯格3类10角色",
+                  page: "导论P53-54",
+                  star: 3,
+                  mnemonic: "代领联 · 监传发 · 企冲资谈",
+                  detail: [
+                    "人际(代表人/领导者[最显著]/联络者) → 信息(监督人/传播者[对内]/发言人[对外]) → 决策(企业家/冲突管理者/资源分配者/谈判者)"
+                  ]
+                },
+                {
+                  id: "ch1_4_2",
+                  branch: 1,
+                  type: "supp",
+                  title: "卡茨三大管理技能",
+                  page: "导论P55-56",
+                  star: 3,
+                  mnemonic: "高层重概念·基层重技术·人际同重",
+                  detail: [
+                    "罗伯特·卡茨提出：概念技能(高层最高)、技术技能(基层最高)、人际技能(高中基同等重要)"
+                  ]
+                }
+              ]
+            },
+            {
+              id: "ch1_5",
+              branch: 1,
+              title: "1.5 原理·方法·工具",
+              page: "导论P60-72",
+              star: 2,
+              mnemonic: "4原理 · 2方法 · 2工具 · 3背景",
+              detail: [
+                "总纲：依循人本/系统/效益/适度四原理，用理性分析+直觉判断两方法，借权力+文化两工具〔导论P60〕"
+              ],
+              children: [
+                {
+                  id: "ch1_5_1",
+                  branch: 1,
+                  title: "四大基本原理",
+                  page: "导论P61-65",
+                  star: 2,
+                  mnemonic: "人本(首要) · 系统 · 效益 · 适度",
+                  detail: [
+                    "人本原理(首要：依靠人+为了人)；系统四特征(整体/相关/有序/外部互动)；效益原理；适度原则(集分权/扁平层级适度)"
+                  ]
+                },
+                {
+                  id: "ch1_5_2",
+                  branch: 1,
+                  title: "两方法·两工具·三背景",
+                  page: "导论P66-72",
+                  star: 1,
+                  mnemonic: "理性+直觉｜权力+文化｜全信市",
+                  detail: [
+                    "方法：理性分析+直觉判断(法/行/经/教)｜工具：权力(4资源)+组织文化(持续/普遍/低成本/无意识)｜背景：全球化·信息化·市场化"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+
+        // ==================== 第二篇：管理理论的历史演变 ====================
+        {
+          id: "ch2",
+          branch: 2,
+          title: "二、管理理论演变",
+          page: "演变课件",
+          star: 3,
+          mnemonic: "经验 → 古典 → 行为 → 现代 → 当代",
+          detail: [
+            "五阶主线：经验管理 → 科学管理(效率) → 行为管理(人) → 定量管理(模型) → 权变管理(环境)〔演变P36〕。"
+          ],
+          children: [
+            {
+              id: "ch2_1",
+              branch: 2,
+              title: "2.1 早期管理思想",
+              page: "演变P2-3",
+              star: 1,
+              mnemonic: "西方凭经验 · 中国九要点",
+              detail: [
+                "西方早期工厂三特点：资本家直接管、凭个人经验、重分工协作",
+                "中国传统九要点：顺道、重人、人和、守信、利器、求实、对策、节俭、法治"
+              ]
+            },
+            {
+              id: "ch2_2",
+              branch: 2,
+              title: "2.2 古典管理三大家",
+              page: "演变P4-19",
+              star: 3,
+              mnemonic: "泰勒个体 · 法约企业 · 韦伯社会",
+              detail: [
+                "三共同点：经济人假设、追求效率最大化、用科学代替经验推进管理职业化〔演变P18-19〕"
+              ],
+              children: [
+                {
+                  id: "ch2_2_1",
+                  branch: 2,
+                  type: "supp",
+                  title: "泰勒：科学管理理论",
+                  page: "演变P5-9",
+                  star: 3,
+                  mnemonic: "定额·标准·一流·计件·计执分离+例外",
+                  detail: [
+                    "五内容：工作定额、标准化、能力与工作相适应(一流工人)、差别计件工资制、计划与执行分离",
+                    "补充重点：心理革命；例外原则(日常授权下级/高层抓重大例外)；八工长制违背统一指挥"
+                  ]
+                },
+                {
+                  id: "ch2_2_2",
+                  branch: 2,
+                  type: "warn",
+                  title: "法约尔：一般管理理论",
+                  page: "演变P10-14",
+                  star: 3,
+                  mnemonic: "经营6＞管理5｜14原则｜双统辨析｜跳板",
+                  detail: [
+                    "经营六职能(技商财安会管)＞管理五职能(计组指协控)",
+                    "14原则口诀：分权纪·双统服·报集等·秩公稳创团",
+                    "必考辨析：统一指挥管人(一人一上司) vs 统一领导管事(一事一头一计划)；法约尔桥(同级授权横向沟通)"
+                  ]
+                },
+                {
+                  id: "ch2_2_3",
+                  branch: 2,
+                  title: "韦伯：科层组织理论",
+                  page: "演变P15-17",
+                  star: 3,
+                  mnemonic: "法理型权力 · 官僚制六特征",
+                  detail: [
+                    "三种权力：传统型、个人魅力型、法理型权力(科层制唯一基础！)",
+                    "六特征(分层选规非职)：劳动分工、职权层级、正式选拔、正式规章、非人性化、职业导向"
+                  ]
+                }
+              ]
+            },
+            {
+              id: "ch2_3",
+              branch: 2,
+              title: "2.3 行为科学与人性假设",
+              page: "演变P20-27",
+              star: 3,
+              mnemonic: "梅奥三结论 · 四种人性假设",
+              detail: [
+                "把人看作宝贵资源，聚焦社会需求、非正式组织与员工满意度〔演变P27〕"
+              ],
+              children: [
+                {
+                  id: "ch2_3_1",
+                  branch: 2,
+                  type: "supp",
+                  title: "梅奥：霍桑实验三结论",
+                  page: "演变P20",
+                  star: 3,
+                  mnemonic: "社会人 · 非正式组织 · 满意度首位",
+                  detail: [
+                    "补充四阶段：照明→福利→访谈→群体实验（霍桑效应）",
+                    "三大观点：工人是社会人、存在非正式组织、生产率首要决定因素是满意度"
+                  ]
+                },
+                {
+                  id: "ch2_3_2",
+                  branch: 2,
+                  type: "warn",
+                  title: "四种人性假设演进",
+                  page: "演变P21-26",
+                  star: 3,
+                  mnemonic: "经济(X)·社会(梅)·自我(Y)·复杂(超Y)",
+                  detail: [
+                    "经济人(X理论) → 社会人(梅奥) → 自我实现人(马斯洛/麦格雷戈Y理论) → 复杂人(沙因提假设/莫尔斯和洛什提超Y理论)"
+                  ]
+                }
+              ]
+            },
+            {
+              id: "ch2_4",
+              branch: 2,
+              title: "2.4 现代管理流派丛林",
+              page: "演变P28-35",
+              star: 3,
+              mnemonic: "巴协 · 西决 · 明六 · 数模 · 菲权",
+              detail: [
+                "二战后多学派深化：社会系统、决策理论、协调机制、管理科学、权变理论"
+              ],
+              children: [
+                {
+                  id: "ch2_4_1",
+                  branch: 2,
+                  type: "supp",
+                  title: "巴纳德：社会系统学派",
+                  page: "演变P28-29",
+                  star: 3,
+                  mnemonic: "协作意愿·共同目标·信息沟通＋权威接受",
+                  detail: [
+                    "《经理人员的职能》三要素：协作意愿、共同目标、信息沟通；补充“权威接受论”四条件"
+                  ]
+                },
+                {
+                  id: "ch2_4_2",
+                  branch: 2,
+                  title: "西蒙决策 & 明茨伯格协调",
+                  page: "演变P31-32",
+                  star: 3,
+                  mnemonic: "西蒙满意准则 · 明氏六协调机制",
+                  detail: [
+                    "西蒙：管理就是决策，有限理性“令人满意”准则",
+                    "明茨伯格六协调：相互调适、直接监督、程序/成果/技能/规范标准化"
+                  ]
+                },
+                {
+                  id: "ch2_4_3",
+                  branch: 2,
+                  title: "管理科学 & 菲德勒权变",
+                  page: "演变P30, P33-35",
+                  star: 2,
+                  mnemonic: "数学模型最优解 · 随环境随机应变",
+                  detail: [
+                    "管理科学(数量学派)：四假设(经济人/效益/人机/决策网)+建立数学模型",
+                    "菲德勒权变理论：无普遍一成不变方法，管理取决于组织环境"
+                  ]
+                }
+              ]
+            },
+            {
+              id: "ch2_5",
+              branch: 2,
+              type: "supp",
+              title: "2.5 [补充] 当代管理思想",
+              page: "补齐演变P1目录03节",
+              star: 2,
+              mnemonic: "制度趋同3 · BPR流程4 · 学习修炼5",
+              detail: [
+                "新制度学派：合法性机制与三大组织趋同(强迫/模仿/社会规范)",
+                "哈默与钱皮 BPR：业务流程中心·根本性·彻底性·戏剧性(显著)",
+                "彼得·圣吉五项修炼：自我超越·心智模式·共同愿景·团队学习·系统思考(核心)"
+              ]
+            }
+          ]
+        },
+
+        // ==================== 第三篇：环境分析与竞争战略 ====================
+        {
+          id: "ch3",
+          branch: 3,
+          title: "三、环境与竞争战略",
+          page: "环境课件",
+          star: 3,
+          mnemonic: "四象限分类 → 外PEST五力 → 内SWOT三战略 → 不确定矩阵",
+          detail: [
+            "完整覆盖《management-environment.pptx》（已剔除P42老师标明不考的情境分析法；决策过程与方法详见「四、决策章节」）。"
+          ],
+          children: [
+            {
+              id: "ch3_1",
+              branch: 3,
+              title: "3.1 环境概念与四象限",
+              page: "环境P2-4",
+              star: 3,
+              mnemonic: "外间一般·外直任务｜内间文化·内直经营",
+              detail: [
+                "外部间接=一般环境(PEST)；外部直接=任务环境(微观五力等)",
+                "内部间接=组织文化；内部直接=经营条件(资源与能力)"
+              ]
+            },
+            {
+              id: "ch3_2",
+              branch: 3,
+              title: "3.2 外部：PEST与波特五力",
+              page: "环境P5-26",
+              star: 3,
+              mnemonic: "宏观PEST · 微观五力与局限",
+              detail: [
+                "宏观一般环境看 PEST；行业竞争结构看迈克尔·波特《竞争战略》五力模型"
+              ],
+              children: [
+                {
+                  id: "ch3_2_1",
+                  branch: 3,
+                  title: "宏观环境：PEST四维",
+                  page: "环境P5-15",
+                  star: 2,
+                  mnemonic: "政法·经济(宏/微)·社会文化·技术(关键)",
+                  detail: [
+                    "注意：消费者收入/偏好/储蓄/就业属于微观经济环境，直接决定市场大小〔环境P9〕；技术环境已成关键因素〔环境P14〕"
+                  ]
+                },
+                {
+                  id: "ch3_2_2",
+                  branch: 3,
+                  type: "warn",
+                  title: "微观环境：波特五力模型",
+                  page: "环境P16-26",
+                  star: 3,
+                  mnemonic: "现有·潜在(5壁垒)·替代·供方(前向)·买方(后向)",
+                  detail: [
+                    "五力：现有竞争者、潜在进入者(规模经济/差异化/独立于规模5优势/设障/政府管制)、替代品(套价格利润上限)、供应商(前向一体化)、买方(后向一体化)",
+                    "三大假定局限：信息全知、只有竞争无合作、行业规模固定〔环境P26〕"
+                  ]
+                }
+              ]
+            },
+            {
+              id: "ch3_3",
+              branch: 3,
+              title: "3.3 内部·SWOT·三大战略",
+              page: "环境P27-41",
+              star: 3,
+              mnemonic: "文化三层 · SWOT四组合 · 波特三战略",
+              detail: [
+                "内部资源能力+文化三层 → SWOT匹配 → 成本领先/差别化/集中化战略"
+              ],
+              children: [
+                {
+                  id: "ch3_3_1",
+                  branch: 3,
+                  type: "supp",
+                  title: "文化三层与SWOT四战略",
+                  page: "环境P27-29",
+                  star: 3,
+                  mnemonic: "理念→规范→形象｜SO·WO·ST·WT",
+                  detail: [
+                    "文化同心圆：共同观念(核心)→行为规范(中层)→组织形象(显现)",
+                    "补充SWOT：SO增长型、WO扭转型、ST多种经营/转化型、WT防御型"
+                  ]
+                },
+                {
+                  id: "ch3_3_2",
+                  branch: 3,
+                  type: "warn",
+                  title: "波特三大基本竞争战略",
+                  page: "环境P30-41",
+                  star: 3,
+                  mnemonic: "成本最低不低档 · 差别必获高溢价 · 集中折衷",
+                  detail: [
+                    "成本领先：须行业成本最低且产品不被视为低档次〔环境P32〕",
+                    "差别化：必须能获得高于行业平均水平的溢价〔环境P37〕",
+                    "集中化：资源能力约束下的折衷战略〔环境P40〕"
+                  ]
+                }
+              ]
+            },
+            {
+              id: "ch3_4",
+              branch: 3,
+              title: "3.4 不确定性与理性决策",
+              page: "环境P43-49",
+              star: 3,
+              mnemonic: "不确定四象限 · 完全vs有限理性 · 决策分类",
+              detail: [
+                "决策背景核心是环境高度不确定性；西蒙以“令人满意”替代“最优化”"
+              ],
+              children: [
+                {
+                  id: "ch3_4_1",
+                  branch: 3,
+                  type: "warn",
+                  title: "不确定性四象限矩阵",
+                  page: "环境P43",
+                  star: 3,
+                  mnemonic: "Ⅰ简稳 ＜ Ⅱ复稳 ＜ Ⅲ简动 ＜ Ⅳ复动",
+                  detail: [
+                    "防坑：简单+不稳定(Ⅲ高—中不确定) ＞ 复杂+稳定(Ⅱ低—中不确定)，动态性比复杂性影响更大！"
+                  ]
+                },
+                {
+                  id: "ch3_4_2",
+                  branch: 3,
+                  title: "古典完全 vs 西蒙有限理性",
+                  page: "环境P44-49",
+                  star: 3,
+                  mnemonic: "西蒙5要点｜3限制(知预设)→下放+民主",
+                  detail: [
+                    "西蒙行为决策5内容：有限理性、知觉偏差、理性相对、更在意风险、求相对满意",
+                    "三限制(知识/预见/设计有限) → 克服：决策权力下放 + 组织民主决策(专家/下属)"
+                  ]
+                },
+              ]
+            }
+          ]
+        },
+
+        // ==================== 第四篇：决策章节 ====================
+        {
+          id: "ch4",
+          branch: 4,
+          title: "四、决策章节",
+          page: "决策P5-21 / 方法P21-38",
+          star: 3,
+          mnemonic: "主准方目情 → 识诊确拟比实评 → 定性3法·定量3算",
+          detail: [
+            "完整融合云盘「决策章节」41张课堂实拍课件（含红字“重点考”科学决策六步、手写“简答题”满意vs最优、手写“每年都出”非确定型损益表及P38笔误勘误）。"
+          ],
+          children: [
+            {
+              id: "ch4_1",
+              branch: 4,
+              title: "4.1 概念·功能·五要素",
+              page: "决策P5-7",
+              star: 2,
+              mnemonic: "五要素：主·准·方·目·情",
+              detail: [
+                "定义：为达特定目的从几种行动方案中做出选择；管理的核心是决策〔决策P5〕",
+                "功能：对组织(管理基础/履行职能核心)；对个人(最核心能力/做正确的事重于正确地做事)〔决策P6〕",
+                "五要素：决策主体、决策准则、决策方案、组织目标、不确定情境〔决策P7〕"
+              ]
+            },
+            {
+              id: "ch4_2",
+              branch: 4,
+              title: "4.2 决策类型与转换",
+              page: "决策P8 / 方法P32",
+              star: 3,
+              mnemonic: "确唯一·风知率·非不知｜程序vs非程序",
+              detail: [
+                "三维度：确定/风险/不确定型；程序化(例行)/非程序化(例外)；个体/群体决策〔决策P8〕"
+              ],
+              children: [
+                {
+                  id: "ch4_2_1",
+                  branch: 4,
+                  title: "两步判断与动态转换",
+                  page: "决策·方法P32",
+                  star: 2,
+                  mnemonic: "获概率：非确定→风险→确定",
+                  detail: [
+                    "1.可能有多种结果吗？否=确定型；是→2.可能性可估计吗？是=风险型，否=非确定型",
+                    "搜集信息估出概率后，非确定型可向风险型、确定型转化〔方法P32〕"
+                  ]
+                },
+                {
+                  id: "ch4_2_2",
+                  branch: 4,
+                  type: "warn",
+                  title: "程序vs非程序｜团体迷思",
+                  page: "补充必辨",
+                  star: 3,
+                  mnemonic: "例行基层 vs 例外高层｜防群体盲从",
+                  detail: [
+                    "程序化(常规例行/中基层) vs 非程序化(首次重大例外/高层)",
+                    "群体决策信息全易共识，但须防“团体迷思”(过度求和谐压制异议)"
+                  ]
+                }
+              ]
+            },
+            {
+              id: "ch4_3",
+              branch: 4,
+              title: "4.3 科学决策六步【重点考】",
+              page: "决策P8-16",
+              star: 3,
+              mnemonic: "识(首步最难)→诊→确→拟→比→实→评",
+              detail: [
+                "课件红字标注【重点考，比如科学决策的第一步是什么？】：第一步是“识别问题”（最重要也最困难，防表象掩盖根源）！"
+              ],
+              children: [
+                {
+                  id: "ch4_3_1",
+                  branch: 4,
+                  title: "识别→诊断→定目标(5标)",
+                  page: "决策P9-11",
+                  star: 3,
+                  mnemonic: "识问题·诊原因·SMART目标",
+                  detail: [
+                    "第一步识别问题(最重要最困难) → 第二步诊断原因 → 第三步确定目标(具体/可衡量/可实现/相关/有时限)"
+                  ]
+                },
+                {
+                  id: "ch4_3_2",
+                  branch: 4,
+                  title: "拟方案→比较(5维)→实施(4点)",
+                  page: "决策P12-16",
+                  star: 3,
+                  mnemonic: "成收风时管｜计分跟调＋评估反馈",
+                  detail: [
+                    "比较五维：成本、收益、风险、时间、管理难度（加权综合评价表）",
+                    "实施四要点：制定计划、分配资源、跟踪反馈、调整修正（闭环评估效果）"
+                  ]
+                }
+              ]
+            },
+            {
+              id: "ch4_4",
+              branch: 4,
+              title: "4.4 准则·五因素·伦理·误区",
+              page: "决策P17-21",
+              star: 3,
+              mnemonic: "满意vs最优｜环文过人时｜幸锚确沉自",
+              detail: [
+                "课件手写标注【简答题】：满意原则 vs 最优原则；为什么不同小组面对相同信息选的不一样(准则权重与风险偏好不同)"
+              ],
+              children: [
+                {
+                  id: "ch4_4_1",
+                  branch: 4,
+                  title: "影响五因素与决策伦理",
+                  page: "决策P19-20",
+                  star: 3,
+                  mnemonic: "环·文·过·人·时｜算经济账更算伦理账",
+                  detail: [
+                    "五因素：环境因素、组织文化、过去决策、决策者特点、时间〔决策P19〕",
+                    "伦理：不仅算经济账还要算伦理账，企业信用一旦毁了很难恢复〔决策P20〕"
+                  ]
+                },
+                {
+                  id: "ch4_4_2",
+                  branch: 4,
+                  type: "warn",
+                  title: "五大常见决策认知误区",
+                  page: "决策P21",
+                  star: 3,
+                  mnemonic: "幸存·锚定·确认·沉没·过度自信",
+                  detail: [
+                    "幸存者偏差(只看成功忽略淘汰)、锚定效应(首信息过重)、确认偏差(只找有利证据)、沉没成本(已投不可收不该影响现在)、过度自信"
+                  ]
+                }
+              ]
+            },
+            {
+              id: "ch4_5",
+              branch: 4,
+              type: "supp",
+              title: "4.5 [补充] 定性决策方法",
+              page: "马工程第4章补全",
+              star: 3,
+              mnemonic: "头面畅·名独投·德背轮｜BCG四象限",
+              detail: [
+                "三大群体法：头脑风暴法(四原则：求数量/禁批评/倡独特/综合改善)、名义小组技术(独立写→陈述→投票)、德尔菲法(匿名背靠背/多轮反馈收敛)",
+                "组合矩阵：波士顿矩阵BCG(增长率×相对份额：明星/问题/现金牛/瘦狗)；政策指导九象限矩阵"
+              ]
+            },
+            {
+              id: "ch4_6",
+              branch: 4,
+              title: "4.6 定量决策计算【每年都出】",
+              page: "方法P21-22, P33-38",
+              star: 3,
+              mnemonic: "保本Q0 · 决策树剪枝 · 乐/悲/后悔值",
+              detail: [
+                "课件手写红字【每年都出】！务必掌握盈亏平衡公式、决策树扣投资逆推、不确定型三大准则计算表。"
+              ],
+              children: [
+                {
+                  id: "ch4_6_1",
+                  branch: 4,
+                  type: "supp",
+                  title: "盈亏平衡点 & 决策树法",
+                  page: "决策P14 / 方法P21-22",
+                  star: 3,
+                  mnemonic: "Q0=F/(P-V)｜左画树·右算期望减投资",
+                  detail: [
+                    "保本产量 Q0 = 固定成本F ÷ (单价P - 单位变动成本V)",
+                    "决策树：□决策点引方案枝，○状态点引概率枝；右向左算期望值，切记减去初始投资额(如大厂64-30=34＞小厂37-20=17)！"
+                  ]
+                },
+                {
+                  id: "ch4_6_2",
+                  branch: 4,
+                  type: "warn",
+                  title: "不确定三准则与P38勘误",
+                  page: "方法P33-38",
+                  star: 3,
+                  mnemonic: "乐观大取大·悲观小取大·后悔列差大取小",
+                  detail: [
+                    "课件例题：乐观选B(100)，悲观选A(20)，最小最大后悔值选C(20)",
+                    "防坑与P38勘误：后悔值先算「列最大减该格」，再找每行最大后悔值，最后取最小（大中取小，课件误印“大中去大法”及“30-20”实为20-20=0）！"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+
+        // ==================== 第五篇：计划章节 ====================
+        {
+          id: "ch5",
+          branch: 5,
+          title: "五、计划章节",
+          page: "计划P1-29 + 第5章",
+          star: 3,
+          mnemonic: "决策与计划 → 目标SMART → MBO目标管理 → PDCA预算追踪",
+          detail: [
+            "完整融合云盘「计划章节」30张课堂实拍课件（含P12手写“不考”标记、红字“补充内容但是很重要”SMART原则、德鲁克MBO及第五章推进调整核心考点）。"
+          ],
+          children: [
+            {
+              id: "ch5_1",
+              branch: 5,
+              title: "5.1 计划本质·特征与分界",
+              page: "计划P6-10",
+              star: 3,
+              mnemonic: "动过名果｜逻辑延续＋普遍性｜决方向计行动",
+              detail: [
+                "定义：对组织未来一段时间内的目标和实现目标途径的策划与安排（含动词过程与名词结果双义）〔计划P6〕"
+              ],
+              children: [
+                {
+                  id: "ch5_1_1",
+                  branch: 5,
+                  title: "两基本特征与首要职能辨析",
+                  page: "计划P7",
+                  star: 3,
+                  mnemonic: "决策逻辑延续 · 普遍性｜决策是首要职能",
+                  detail: [
+                    "两特征：1.计划是决策的逻辑延续；2.计划工作具有普遍性〔计划P7〕",
+                    "马工程定论：环境常态变化下，决策已成为管理的首要职能，计划是决策的延续与落实〔计划P7〕"
+                  ]
+                },
+                {
+                  id: "ch5_1_2",
+                  branch: 5,
+                  type: "warn",
+                  title: "决策与计划的关系与分界",
+                  page: "计划P8, P10",
+                  star: 3,
+                  mnemonic: "决答做什么(依据) · 计答怎么做(保证)",
+                  detail: [
+                    "决策为计划提供依据(选方向/做什么)，计划为决策落实提供保证(怎么做/何时/谁做)；相互渗透交织，计划每步安排充满决策〔计划P8/P10〕"
+                  ]
+                }
+              ]
+            },
+            {
+              id: "ch5_2",
+              branch: 5,
+              title: "5.2 计划五作用·类型·编制",
+              page: "计划P11-13",
+              star: 3,
+              mnemonic: "指控降提激｜战略·战术·作业｜滚动近细远粗",
+              detail: [
+                "注意：〔计划P12〕三种划分标准表底部有老师手写“不考”，重点背〔P11〕五作用、〔P13〕三层金字塔及滚动计划法！"
+              ],
+              children: [
+                {
+                  id: "ch5_2_1",
+                  branch: 5,
+                  title: "五大作用与三层计划金字塔",
+                  page: "计划P11, P13",
+                  star: 3,
+                  mnemonic: "指抓·控标·降险·提效·激气｜高战中战基作",
+                  detail: [
+                    "五作用：指挥抓手、控制标准、降低不确定性手段、提高效率效益工具、激励士气依据〔计划P11〕",
+                    "金字塔：战略计划(高层长期) → 战术计划(中层中期) → 作业计划(基层短期刚性)〔计划P13〕；另有具体性 vs 指导性计划"
+                  ]
+                },
+                {
+                  id: "ch5_2_2",
+                  branch: 5,
+                  type: "supp",
+                  title: "[补充] 五步编制与滚动计划法",
+                  page: "教材P116-118",
+                  star: 3,
+                  mnemonic: "定目→估差→测未→定方→施总｜近细远粗",
+                  detail: [
+                    "编制五步：定目标→估现状差距→预测未来→制定方案→实施总结",
+                    "滚动计划法：“近细远粗(近具体、远概略)”，每执行一期根据变化修订顺延一期，衔接长中短期并增强弹性；另有PERT网络图与甘特图"
+                  ]
+                }
+              ]
+            },
+            {
+              id: "ch5_3",
+              branch: 5,
+              title: "5.3 目标体系与SMART原则",
+              page: "计划P15-20 + 补充页",
+              star: 3,
+              mnemonic: "五重要性 · 宗抽目诺 · 差层多时 · SMART",
+              detail: [
+                "先有明确目标再谈计划（不知码头在哪，任何风都不是顺风）〔计划P15-16〕"
+              ],
+              children: [
+                {
+                  id: "ch5_3_1",
+                  branch: 5,
+                  title: "五重要性·宗旨愿景·四特点",
+                  page: "计划P17-20",
+                  star: 2,
+                  mnemonic: "准指协激标｜使因愿样价准｜差层多时",
+                  detail: [
+                    "五重要性：决策准则、行动指南、协调基础、激励热情、衡量标准〔P17〕",
+                    "宗旨抽象追求 vs 目标具体行动承诺；使命(为何做)·愿景(成何样)·价值观(准则)〔P18〕",
+                    "组织目标四特点：差异性、层次性、多元性、时间性；寻求组织与个人目标平衡〔P19-20〕"
+                  ]
+                },
+                {
+                  id: "ch5_3_2",
+                  branch: 5,
+                  type: "supp",
+                  title: "SMART五要求【红字：很重要】",
+                  page: "计划·补充页",
+                  star: 3,
+                  mnemonic: "S具体·M可衡量·A能实现·R相关联·T有时限",
+                  detail: [
+                    "课件红字标注【补充内容但是很重要】：Specific具体的、Measurable可衡量(用数字客观评价)、Attainable能实现(高而合理)、Relevant相关联(联宗旨与职责)、Time-bound有时限"
+                  ]
+                }
+              ]
+            },
+            {
+              id: "ch5_4",
+              branch: 5,
+              title: "5.4 目标管理（MBO）",
+              page: "计划P22-29",
+              star: 3,
+              mnemonic: "1954德鲁克｜参·果·自·系｜设·实·评三阶段",
+              detail: [
+                "1954彼得·德鲁克《管理的实践》提出，破除传统单向下达“层层走样、被动服从”弊端，用目标激励而非控制下级〔计划P22-24〕。"
+              ],
+              children: [
+                {
+                  id: "ch5_4_1",
+                  branch: 5,
+                  title: "MBO四个特点与目标七性质",
+                  page: "计划P26, P29",
+                  star: 3,
+                  mnemonic: "参与·成果·自控·系统体系｜层网多考接挑馈",
+                  detail: [
+                    "四特点：参与管理(上下共商)、重视成果、自我控制、系统目标体系〔计划P26〕",
+                    "七性质：层次性、网络性、多样性、可考核性、可接受性、富有挑战性、伴随信息反馈性〔计划P29〕"
+                  ]
+                },
+                {
+                  id: "ch5_4_2",
+                  branch: 5,
+                  type: "supp",
+                  title: "三阶段过程与MBO优缺点局限",
+                  page: "计划P28 + 教材P120-122",
+                  star: 3,
+                  mnemonic: "设定→实现→评价｜耗时·短期行为·目标停滞",
+                  detail: [
+                    "三阶段：目标设定(上司提议+部下参加) → 实现过程(委托+自我控制) → 成果评价(自评+上司评价)〔计划P28〕",
+                    "局限性(教学重难点)：制定耗时成本高、易诱发短期行为、存在“目标停滞”缺乏应变弹性、过度偏重可量化指标"
+                  ]
+                }
+              ]
+            },
+            {
+              id: "ch5_5",
+              branch: 5,
+              type: "supp",
+              title: "5.5 [补充] PDCA·预算·追踪调整",
+              page: "计划P2大纲·教材第5章",
+              star: 3,
+              mnemonic: "PDCA八步A关键 · 零基预算 · 追踪回非双心",
+              detail: [
+                "补齐〔计划P2〕大纲第四模块与教学难点："
+              ],
+              children: [
+                {
+                  id: "ch5_5_1",
+                  branch: 5,
+                  type: "supp",
+                  title: "PDCA戴明环与零基预算",
+                  page: "教材P123-127",
+                  star: 3,
+                  mnemonic: "四P一D一C二A(A是关键)｜刚弹预算·零基归零",
+                  detail: [
+                    "PDCA(计划-实施-检查-改进)：大环套小环、阶梯上升、A(改进标准化)是推动关键；4阶段8步骤",
+                    "预算：数字化的计划(经营/投资/财务总预算)；刚性vs弹性预算；零基预算(ZBB，不受基期束缚从零重审优先级)"
+                  ]
+                },
+                {
+                  id: "ch5_5_2",
+                  branch: 5,
+                  type: "warn",
+                  title: "决策追踪与调整【教学难点】",
+                  page: "教材P128-134",
+                  star: 3,
+                  mnemonic: "四特征：回溯分析·非零起点·双重优化·心理障碍",
+                  detail: [
+                    "四大特征(必背)：回溯分析(由果溯因)、非零起点(已有投入)、双重优化(优于原方案且新方案中最优)、心理障碍",
+                    "三大组织诊断工具：鱼刺图(找因果)、雷达图(看均衡短板)、趋势图(看动态轨迹)"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+
+    const QUIZ_DATA = [
+      {
+        q: "1. 教材对“管理”的综合定义是什么？管理的本质以及四大基本职能各自的“着眼点”分别是什么？",
+        a: "<strong>定义</strong>：为了有效地实现组织目标，由管理者利用相关知识、技术和方法对组织活动进行<strong>决策、组织、领导、控制并不断创新</strong>的过程〔导论P31〕。<br><strong>本质</strong>：协调（对人的行为进行协调）〔P32/P57〕。<br><strong>四大着眼点</strong>：决策(计划)—有限资源的合理配置；组织—合理的分工与明确的协作关系建立；领导—积极性的调动和方向的把握；控制—纠偏〔P48〕。"
+      },
+      {
+        q: "2. 效率、效果、效益三者如何区分？管理的“自然属性”与“社会属性”分别同什么相联系？",
+        a: "<strong>效率</strong>＝用正确的方法做事情（重方法/低浪费）；<strong>效果</strong>＝实现目标的程度（重有效性）；<strong>效益</strong>＝用正确的方法做正确的事情（重决策，既讲效率又讲效果）〔导论P25〕。<br><strong>自然属性</strong>同生产力、社会化大生产相联系；<strong>社会属性</strong>同生产关系、社会制度相联系（体现生产资料所有者的指挥和监督）〔P59〕。"
+      },
+      {
+        q: "3. 明茨伯格将管理者角色分为哪3大类10种？罗伯特·卡茨的三大管理技能在高、中、基层如何分布？",
+        a: "<strong>3类10角色</strong>：①人际角色（代表人、领导者[最显著]、联络者）；②信息角色（监督人、传播者[对内]、发言人[对外]）；③决策角色（企业家、冲突管理者、资源分配者、谈判者）〔导论P53-54〕。<br><strong>卡茨三技能</strong>：高层最重<strong>概念技能</strong>，基层最重<strong>技术技能</strong>，<strong>人际技能</strong>对高、中、基层同等重要〔P55-56〕。"
+      },
+      {
+        q: "4. 管理的四大基本原理、两大基本方法、两大基本工具分别是什么？首要原理是哪一个？",
+        a: "<strong>四大原理</strong>：人本原理（<strong>首要原理</strong>：依靠人的管理＋为了人的管理）、系统原理（整体性/相关性/有序性/互动性）、效益原理、适度原则。<br><strong>两大方法</strong>：理性分析 ＋ 直觉判断。<br><strong>两大工具</strong>：权力（直接规范与控制）＋ 组织文化（持续、普遍、低成本、无意识引导）〔导论P60-70〕。"
+      },
+      {
+        q: "5. 泰勒、法约尔、韦伯三大古典管理理论的共同点与各自效率侧重点是什么？泰勒科学管理的五项主要内容和“例外原则”是什么？",
+        a: "<strong>共同点</strong>：经济人假设＋效率最大化目标＋用科学代替经验＋管理专业化职业化。<strong>侧重</strong>：泰勒重个体效率，法约尔重企业组织效率，韦伯重社会组织效率〔演变P18-19〕。<br><strong>泰勒五内容</strong>：工作定额、标准化、能力与工作相适应（第一流工人=能力+意愿）、差别计件工资制、计划与执行相分离〔P9〕。<strong>例外原则</strong>：日常事务授权下级，高层只保留对重大事项和超常规例外事项的决策监督权。"
+      },
+      {
+        q: "6. 法约尔认为“经营”与“管理”是什么关系？如何精准区分“统一指挥”与“统一领导（统一指导）”？什么是“法约尔桥”？",
+        a: "<strong>经营与管理</strong>：经营包含技术、商业、财务、安全、会计、管理六大职能，<strong>管理只是经营的一部分</strong>〔演变P11〕。<br><strong>辨析</strong>：<strong>统一指挥管“人”</strong>（一个下级只接受一个上级命令，属日常执行）；<strong>统一领导管“事”</strong>（同一目的的全部活动只有一个领导人和一项计划，属机构与计划设置）。<br><strong>法约尔桥（跳板原则）</strong>：允许不同部门同级在征得各自上级授权并事后汇报的前提下直接横向沟通，兼顾统一指挥与沟通效率。"
+      },
+      {
+        q: "7. 韦伯认为哪种权力才是科层组织的基础？官僚制的六大主要特征是什么？",
+        a: "<strong>权力基础</strong>：三种合法权力（传统型、个人魅力型、法理型）中，<strong>只有法理型权力才能成为科层组织的基础</strong>〔演变P17〕。<br><strong>六大特征（分层选规非职）</strong>：1.劳动分工；2.职权层级；3.正式选拔；4.正式规章制度；5.非人性化；6.职业导向〔P16〕。"
+      },
+      {
+        q: "8. 梅奥霍桑实验得出了哪三大核心结论？“复杂人假设”与“超Y理论”分别由谁提出？",
+        a: "<strong>三大结论</strong>：1.工人是“社会人”；2.企业中除正式组织外还存在“非正式组织”；3.决定劳动生产率的首位因素是工人的“满意度”，生产条件和工资报酬居次位〔演变P20〕。<br><strong>人物防坑</strong>：<strong>沙因</strong>提出“复杂人假设”，<strong>莫尔斯和洛什</strong>提出“超Y理论”〔P26〕。"
+      },
+      {
+        q: "9. 波特五力模型包括哪五种力量？如何区分“前向垂直一体化”与“后向垂直一体化”？五力模型有哪三大假定局限？",
+        a: "<strong>五种力量</strong>：行业现有竞争者、潜在进入者威胁、替代品威胁（套上价格和利润上限）、供应商议价能力、买方议价能力〔环境P17-25〕。<br><strong>一体化方向</strong>：向终端顾客方向延伸＝前向一体化（如供方下场做成品）；向上游原材料方向延伸＝后向一体化（如买方自建原料厂）。<br><strong>三大假定局限</strong>：假定能掌握全行业信息、假定同行只有竞争没有合作、假定行业规模固定不能共同做大蛋糕〔P26〕。"
+      },
+      {
+        q: "10. 环境不确定性矩阵中“简单+不稳定”与“复杂+稳定”哪个不确定性更高？西蒙行为决策理论有哪五大内容？如何克服决策理性限制？",
+        a: "<strong>不确定性排序</strong>：<strong>简单+不稳定（Ⅲ：高—中程度）＞ 复杂+稳定（Ⅱ：低—中程度）</strong>〔环境P43〕。<br><strong>西蒙行为决策5内容</strong>（以“令人满意”代替“最优化”）：1.人是有限理性的；2.易受知觉偏差影响；3.选择的理性是相对的；4.相比经济利益更在意决策风险；5.只求相对满意结果〔P46〕。<br><strong>克服3大理性限制（知识/预见/设计有限）的2途径</strong>：决策权力下放 ＋ 组织民主决策（专家参与、下属参与）〔P48-49〕。"
+      },
+      {
+        q: "11. 【决策章节】科学决策过程的六步闭环是什么（第一步是什么）？影响决策的五大因素与五大常见决策误区有哪些？",
+        a: "<strong>六步闭环</strong>：<strong>1.识别问题（第一步，最重要也最困难）</strong> → 2.诊断原因 → 3.确定目标 → 4.拟定方案 → 5.比较方案（成本/收益/风险/时间/管理难度） → 6.实施决策（制定计划/分配资源/跟踪反馈/调整修正）→ 评估效果反馈〔决策P8-16〕。<br><strong>五大影响因素</strong>：环境因素、组织文化、过去决策、决策者特点、时间〔P19〕。<br><strong>五大认知误区</strong>：幸存者偏差、锚定效应、确认偏差、沉没成本、过度自信〔P21〕。"
+      },
+      {
+        q: "12. 【决策章节·每年必考】如何区分头脑风暴法、名义小组技术与德尔菲法？不确定型决策的乐观、悲观、最小最大后悔值准则如何计算？",
+        a: "<strong>三大定性法</strong>：头脑风暴法（当面自由联想、禁止批评求数量）；名义小组技术（到场独立书面写方案→轮流陈述→独立投票）；德尔菲法（专家匿名背靠背函询、多轮反馈统计收敛）。<br><strong>不确定型三准则（收益矩阵）</strong>：①乐观准则（大中取大：每行最大中选最大）；②悲观准则（小中取大：每行最小中选最大）；③<strong>最小最大后悔值准则</strong>（先按列用“该列最大收益－各方案收益”算后悔值矩阵，再找每行最大后悔值，最后取其中最小者“大中取小”）〔决策·方法P33-38〕。"
+      },
+      {
+        q: "13. 【计划章节】决策与计划的区别和联系是什么？计划有哪五大作用？目标制订的 SMART 五要素是什么？",
+        a: "<strong>决策与计划关系</strong>：决策回答“做什么、选方向”（是管理的首要职能，为计划提供依据）；计划回答“怎么做、何时做、谁来做”（是决策的逻辑延续，为决策落实提供保证），两者相互渗透交织，计划每步安排充满决策〔计划P7-10〕。<br><strong>五大作用</strong>：指挥抓手、控制标准、降低不确定性手段、提高效率效益工具、激励士气依据〔P11〕。<br><strong>SMART五要求</strong>：Specific具体的、Measurable可衡量、Attainable能实现、Relevant相关联、Time-bound有时限〔补充页〕。"
+      },
+      {
+        q: "14. 【计划章节】德鲁克目标管理（MBO）的四个特点与局限性是什么？PDCA 循环的关键阶段及“决策追踪与调整”的四大特征是什么？",
+        a: "<strong>MBO四特点</strong>：参与管理（上下共商破除层层走样）、重视成果、自我控制、系统目标体系〔计划P26〕；<strong>局限性</strong>：耗时成本高、易诱发短期行为、目标停滞缺弹性。<br><strong>PDCA循环</strong>：Plan计划→Do实施→Check检查→<strong>Action改进（推动循环的关键阶段，固化标准转入下轮）</strong>。<br><strong>决策追踪与调整四特征（回非双心）</strong>：回溯分析、非零起点、双重优化、心理障碍。"
+      }
+    ];
+
+    // =========================================================================
+    // 2. 状态管理与树形初始化
+    // =========================================================================
+    const state = {
+      mode: "map",
+      scale: 0.92,
+      tx: 60,
+      ty: 60,
+      recallMask: false,
+      filter: "all", // 'all' | 'star3' | 'supp'
+      searchQuery: "",
+      searchHits: [],
+      searchIdx: 0,
+      selectedId: "root",
+      compactCards: true,
+      rootScope: "root",
+      minimapMinimized: false,
+      collapsed: new Set(),
+      revealed: new Set(),
+      masteredQuiz: new Set(),
+      nodeMap: new Map(),
+      layoutNodes: [],
+      layoutEdges: [],
+      worldBounds: { minX: 0, minY: 0, maxX: 1200, maxY: 800 }
+    };
+
+    // Load saved quiz progress safely
+    try {
+      const saved = localStorage.getItem("mgmt_mindmap_quiz_v1");
+      if (saved) {
+        JSON.parse(saved).forEach(idx => state.masteredQuiz.add(idx));
+      }
+    } catch (err) {
+      // Ignore storage restriction in sandboxed environments
+    }
+
+    function indexTree(node, depth = 0, parent = null, branch = 0) {
+      node.depth = depth;
+      node.parentId = parent ? parent.id : null;
+      node.branch = node.branch || branch;
+      state.nodeMap.set(node.id, node);
+      // Default initial expand up to depth 2 (so depth 0, 1, 2 visible; depth 2's children collapsed initially if depth >= 3)
+      if (depth >= 2 && node.children && node.children.length > 0) {
+        state.collapsed.add(node.id);
+      }
+      if (node.children) {
+        node.children.forEach(child => indexTree(child, depth + 1, node, node.branch));
+      }
+    }
+    indexTree(MINDMAP_DATA);
+    // Expand ch1, ch2, ch3 depth-2 children up to depth 3 by default so 3 levels show richly!
+    state.nodeMap.forEach(n => {
+      if (n.depth < 2) state.collapsed.delete(n.id);
+    });
+
+    function setExpandDepth(maxDepth) {
+      state.collapsed.clear();
+      state.nodeMap.forEach(n => {
+        if (n.children && n.children.length > 0 && n.depth >= maxDepth) {
+          state.collapsed.add(n.id);
+        }
+      });
+      renderMindMap();
+    }
+
+    // =========================================================================
+    // 3. 零重叠自适应树布局与 SVG 贝塞尔连线渲染引擎
+    // =========================================================================
+    const mapViewport = document.getElementById("mapViewport");
+    const mapWorld = document.getElementById("mapWorld");
+    const nodesLayer = document.getElementById("nodesLayer");
+    const edgesSvg = document.getElementById("edgesSvg");
+    const zoomReadout = document.getElementById("zoomReadout");
+    const minimapCanvas = document.getElementById("minimapCanvas");
+    const minimapBox = document.getElementById("minimapBox");
+
+    const H_GAP = 72;
+    const V_GAP = 16;
+    const CHAPTER_MACRO_GAP = 28;
+
+    function getActiveRoot() {
+      if (state.rootScope && state.rootScope !== "root") {
+        return state.nodeMap.get(state.rootScope) || MINDMAP_DATA;
+      }
+      return MINDMAP_DATA;
+    }
+
+    function matchesFilter(node) {
+      if (state.filter === "star3") return (node.star || 0) >= 3;
+      if (state.filter === "supp") return node.type === "supp" || node.type === "warn";
+      return true;
+    }
+
+    function subtreeHasMatch(node, predicate) {
+      if (predicate(node)) return true;
+      if (node.children) {
+        return node.children.some(c => subtreeHasMatch(c, predicate));
+      }
+      return false;
+    }
+
+    function collectVisible(node, list = []) {
+      list.push(node);
+      if (node.children && node.children.length > 0 && !state.collapsed.has(node.id)) {
+        node.children.forEach(c => collectVisible(c, list));
+      }
+      return list;
+    }
+
+    function createNodeElement(node) {
+      const el = document.createElement("div");
+      const classes = ["mm-node", `depth-${Math.min(node.depth, 5)}`];
+      if (node.branch) classes.push(`branch-${node.branch}`);
+      if (node.type === "supp") classes.push("is-supp");
+      if (node.type === "warn") classes.push("is-warn");
+      if (state.selectedId === node.id) classes.push("selected");
+      if (state.revealed.has(node.id)) classes.push("revealed");
+
+      const isHit = state.searchHits.includes(node.id);
+      if (isHit) classes.push("search-hit");
+
+      if (state.filter !== "all" && node.depth > 0 && !subtreeHasMatch(node, matchesFilter)) {
+        classes.push("dimmed");
+      } else if (state.searchQuery && !isHit && node.depth > 0) {
+        classes.push("dimmed");
+      }
+
+      el.className = classes.join(" ");
+      el.dataset.nodeId = node.id;
+
+      let html = "";
+      if (state.compactCards) {
+        // Ultra-clean Xmind capsule mode: single-row title + inline tiny tag (no multi-line clutter!)
+        let inlineTags = "";
+        if (node.type === "warn") inlineTags += '<span class="badge badge-warn" style="margin-right:4px;">辨析</span>';
+        else if (node.type === "supp") inlineTags += '<span class="badge badge-supp" style="margin-right:4px;">补充</span>';
+        else if (node.star === 3 && node.depth >= 2) inlineTags += '<span class="badge badge-star3" style="margin-right:4px;">★</span>';
+        html += `<div class="node-title">${inlineTags}${node.title}</div>`;
+        if (node.mnemonic && node.depth <= 1) {
+          html += `<div class="node-hook">${node.mnemonic}</div>`;
+        }
+      } else {
+        // Full detail card mode
+        const badges = [];
+        if (node.star === 3) badges.push('<span class="badge badge-star3">★★★必背</span>');
+        else if (node.star === 2) badges.push('<span class="badge badge-star2">★★重点</span>');
+        else if (node.star === 1) badges.push('<span class="badge badge-star1">★基础</span>');
+
+        if (node.type === "supp") badges.push('<span class="badge badge-supp">💡课外补充</span>');
+        if (node.type === "warn") badges.push('<span class="badge badge-warn">⚠️易混辨析</span>');
+        if (node.page) badges.push(`<span class="badge badge-page">${node.page}</span>`);
+        if (node.mnemonic && node.depth >= 2) badges.push(`<span class="badge badge-mnem">${node.mnemonic}</span>`);
+
+        if (badges.length > 0) {
+          html += `<div class="node-badges">${badges.join("")}</div>`;
+        }
+        html += `<div class="node-title">${node.title}</div>`;
+        if (node.summary) {
+          html += `<div class="node-summary">${node.summary}</div>`;
+        }
+      }
+
+      if (node.children && node.children.length > 0) {
+        const isCol = state.collapsed.has(node.id);
+        const label = isCol ? `+${node.children.length}` : "−";
+        html += `<button type="button" class="toggle-pill ${isCol ? "collapsed" : ""}" data-toggle-id="${node.id}" title="${isCol ? "展开子分支" : "折叠子分支"}">${label}</button>`;
+      }
+
+      el.innerHTML = html;
+      return el;
+    }
+
+    function renderMindMap() {
+      nodesLayer.innerHTML = "";
+      edgesSvg.innerHTML = "";
+
+      mapWorld.classList.toggle("recall-masked", !!state.recallMask);
+      mapWorld.classList.toggle("compact-cards", !!state.compactCards);
+
+      const activeRoot = getActiveRoot();
+      const visibleNodes = collectVisible(activeRoot);
+      const domMap = new Map();
+
+      // Step 1: Mount DOM nodes off-flow to measure exact real heights & widths
+      visibleNodes.forEach(n => {
+        const el = createNodeElement(n);
+        nodesLayer.appendChild(el);
+        domMap.set(n.id, el);
+      });
+
+      visibleNodes.forEach(n => {
+        const el = domMap.get(n.id);
+        n._w = el.offsetWidth || 220;
+        n._h = el.offsetHeight || 48;
+      });
+
+      // Step 2: Bottom-up subtree height calculation with macro breathing room between chapters
+      const activeVGap = state.compactCards ? 9 : V_GAP;
+      const activeMacroGap = state.compactCards ? 20 : CHAPTER_MACRO_GAP;
+      function calcSpan(n) {
+        const extraMacro = n.depth === 1 ? activeMacroGap : 0;
+        const hasOpenChildren = n.children && n.children.length > 0 && !state.collapsed.has(n.id);
+        if (!hasOpenChildren) {
+          n._span = n._h + activeVGap + extraMacro;
+          return n._span;
+        }
+        let childSum = 0;
+        n.children.forEach(c => {
+          childSum += calcSpan(c);
+        });
+        n._span = Math.max(n._h + activeVGap, childSum) + extraMacro;
+        return n._span;
+      }
+      calcSpan(activeRoot);
+
+      // Step 3: Top-down exact coordinate assignment (100% overlap-free)
+      const edges = [];
+      let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+
+      function assignPos(n, x, topY) {
+        n._x = x;
+        n._y = topY + (n._span - n._h) / 2;
+
+        minX = Math.min(minX, n._x);
+        minY = Math.min(minY, n._y);
+        maxX = Math.max(maxX, n._x + n._w);
+        maxY = Math.max(maxY, n._y + n._h);
+
+        const el = domMap.get(n.id);
+        el.style.left = `${Math.round(n._x)}px`;
+        el.style.top = `${Math.round(n._y)}px`;
+
+        const hasOpenChildren = n.children && n.children.length > 0 && !state.collapsed.has(n.id);
+        if (hasOpenChildren) {
+          const childX = x + n._w + H_GAP;
+          let curTop = topY + (n._span - n.children.reduce((acc, c) => acc + c._span, 0)) / 2;
+          n.children.forEach(c => {
+            assignPos(c, childX, curTop);
+            edges.push({ from: n, to: c });
+            curTop += c._span;
+          });
+        }
+      }
+      assignPos(activeRoot, 0, 0);
+
+      state.layoutNodes = visibleNodes;
+      state.layoutEdges = edges;
+      state.worldBounds = { minX, minY, maxX, maxY };
+
+      // Step 4: Render smooth cubic Bézier SVG edges
+      const frag = document.createDocumentFragment();
+      const branchStroke = {
+        0: "#475569",
+        1: "#10b981",
+        2: "#3b82f6",
+        3: "#8b5cf6",
+        4: "#06b6d4",
+        5: "#f43f5e"
+      };
+      edges.forEach(({ from, to }) => {
+        const x1 = from._x + from._w;
+        const y1 = from._y + from._h / 2;
+        const x2 = to._x;
+        const y2 = to._y + to._h / 2;
+        const dx = Math.max(28, (x2 - x1) * 0.52);
+
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`);
+        path.setAttribute("fill", "none");
+        const color = to.type === "warn" ? "#ef4444" : (to.type === "supp" ? "#f59e0b" : (branchStroke[to.branch] || "#64748b"));
+        path.setAttribute("stroke", color);
+        path.setAttribute("stroke-width", to.depth <= 2 ? "2.6" : "1.8");
+        path.setAttribute("stroke-opacity", "0.78");
+        frag.appendChild(path);
+      });
+      edgesSvg.appendChild(frag);
+
+      applyTransform();
+    }
+
+    function applyTransform() {
+      mapWorld.style.transform = `translate(${state.tx}px, ${state.ty}px) scale(${state.scale})`;
+      mapViewport.style.backgroundPosition = `${state.tx}px ${state.ty}px`;
+      mapViewport.style.backgroundSize = `${Math.max(12, 22 * state.scale)}px ${Math.max(12, 22 * state.scale)}px`;
+      zoomReadout.textContent = `${Math.round(state.scale * 100)}%`;
+      drawMinimap();
+    }
+
+    function fitToScreen(padding = 44) {
+      const vw = mapViewport.clientWidth || 900;
+      const vh = mapViewport.clientHeight || 600;
+      const topReserve = 42;
+      const bottomReserve = 52;
+      const { minX, minY, maxX, maxY } = state.worldBounds;
+      const bw = Math.max(200, maxX - minX);
+      const bh = Math.max(200, maxY - minY);
+
+      const availW = Math.max(240, vw - padding * 2);
+      const availH = Math.max(200, vh - topReserve - bottomReserve);
+      const scaleX = availW / bw;
+      const scaleY = availH / bh;
+      const nextScale = Math.min(1.12, Math.max(0.24, Math.min(scaleX, scaleY)));
+
+      state.scale = nextScale;
+      state.tx = (vw - bw * nextScale) / 2 - minX * nextScale;
+      state.ty = topReserve + (availH - bh * nextScale) / 2 - minY * nextScale;
+      applyTransform();
+    }
+
+    function focusNode(nodeId, targetScale = null) {
+      const n = state.nodeMap.get(nodeId);
+      if (!n) return;
+      // Ensure all ancestors are expanded
+      let cur = n.parentId ? state.nodeMap.get(n.parentId) : null;
+      let changed = false;
+      while (cur) {
+        if (state.collapsed.has(cur.id)) {
+          state.collapsed.delete(cur.id);
+          changed = true;
+        }
+        cur = cur.parentId ? state.nodeMap.get(cur.parentId) : null;
+      }
+      if (changed) renderMindMap();
+
+      const vw = mapViewport.clientWidth || 900;
+      const vh = mapViewport.clientHeight || 600;
+      if (targetScale !== null) {
+        state.scale = Math.min(2.2, Math.max(0.3, targetScale));
+      } else if (state.scale < 0.72) {
+        state.scale = 0.88;
+      }
+      const cx = n._x + n._w / 2;
+      const cy = n._y + n._h / 2;
+      state.tx = vw * 0.36 - cx * state.scale;
+      state.ty = vh * 0.50 - cy * state.scale;
+      applyTransform();
+    }
+
+    // =========================================================================
+    // 4. 缩略图导航 (Minimap) 渲染与点击跳转
+    // =========================================================================
+    function drawMinimap() {
+      if (!minimapCanvas) return;
+      const ctx = minimapCanvas.getContext("2d");
+      const mw = minimapCanvas.width;
+      const mh = minimapCanvas.height;
+      ctx.clearRect(0, 0, mw, mh);
+
+      const { minX, minY, maxX, maxY } = state.worldBounds;
+      const bw = Math.max(300, maxX - minX + 120);
+      const bh = Math.max(200, maxY - minY + 120);
+      const ox = minX - 60;
+      const oy = minY - 60;
+      const s = Math.min(mw / bw, mh / bh);
+
+      const colorMap = { 0: "#0f172a", 1: "#059669", 2: "#2563eb", 3: "#7c3aed", 4: "#0891b2", 5: "#e11d48" };
+      state.layoutNodes.forEach(n => {
+        ctx.fillStyle = colorMap[n.branch || 0] || "#64748b";
+        const rx = (n._x - ox) * s;
+        const ry = (n._y - oy) * s;
+        const rw = Math.max(4, n._w * s);
+        const rh = Math.max(2.5, n._h * s);
+        ctx.fillRect(rx, ry, rw, rh);
+      });
+
+      // Draw current viewport rect
+      const vw = mapViewport.clientWidth || 900;
+      const vh = mapViewport.clientHeight || 600;
+      const worldLeft = -state.tx / state.scale;
+      const worldTop = -state.ty / state.scale;
+      const worldW = vw / state.scale;
+      const worldH = vh / state.scale;
+
+      ctx.strokeStyle = "#2563eb";
+      ctx.lineWidth = 1.6;
+      ctx.fillStyle = "rgba(37, 99, 235, 0.10)";
+      const vx = (worldLeft - ox) * s;
+      const vy = (worldTop - oy) * s;
+      const vws = worldW * s;
+      const vhs = worldH * s;
+      ctx.fillRect(vx, vy, vws, vhs);
+      ctx.strokeRect(vx, vy, vws, vhs);
+
+      minimapBox._meta = { ox, oy, s };
+    }
+
+    document.getElementById("btnToggleMinimap").addEventListener("click", e => {
+      e.stopPropagation();
+      state.minimapMinimized = !state.minimapMinimized;
+      minimapBox.classList.toggle("minimized", state.minimapMinimized);
+      document.getElementById("minimapToggleIcon").textContent = state.minimapMinimized ? "▴" : "▾";
+      if (!state.minimapMinimized) drawMinimap();
+    });
+
+    minimapCanvas.addEventListener("pointerdown", e => {
+      e.stopPropagation();
+      const meta = minimapBox._meta;
+      if (!meta) return;
+      const rect = minimapCanvas.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+      const targetWorldX = clickX / meta.s + meta.ox;
+      const targetWorldY = clickY / meta.s + meta.oy;
+      const vw = mapViewport.clientWidth || 900;
+      const vh = mapViewport.clientHeight || 600;
+      state.tx = vw / 2 - targetWorldX * state.scale;
+      state.ty = vh / 2 - targetWorldY * state.scale;
+      applyTransform();
+    });
+
+    // =========================================================================
+    // 5. 鼠标滚轮缩放、拖拽漫游、双指触控缩放与节点点击交互
+    // =========================================================================
+    function zoomAtPoint(factor, clientX, clientY) {
+      const rect = mapViewport.getBoundingClientRect();
+      const px = clientX - rect.left;
+      const py = clientY - rect.top;
+      const nextScale = Math.min(2.4, Math.max(0.22, state.scale * factor));
+      const ratio = nextScale / state.scale;
+      state.tx = px - (px - state.tx) * ratio;
+      state.ty = py - (py - state.ty) * ratio;
+      state.scale = nextScale;
+      applyTransform();
+    }
+
+    mapViewport.addEventListener("wheel", e => {
+      e.preventDefault();
+      const delta = -e.deltaY;
+      const factor = delta > 0 ? 1.10 : 0.90;
+      zoomAtPoint(factor, e.clientX, e.clientY);
+    }, { passive: false });
+
+    let isPointerDown = false;
+    let dragMoved = false;
+    let startX = 0, startY = 0;
+    let startTx = 0, startTy = 0;
+    const activePointers = new Map();
+    let lastPinchDist = null;
+
+    mapViewport.addEventListener("pointerdown", e => {
+      if (e.target.closest(".zoom-dock") || e.target.closest(".minimap-box") || e.target.closest(".legend-bar")) {
+        return;
+      }
+      activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (activePointers.size === 1) {
+        isPointerDown = true;
+        dragMoved = false;
+        startX = e.clientX;
+        startY = e.clientY;
+        startTx = state.tx;
+        startTy = state.ty;
+      } else if (activePointers.size === 2) {
+        const pts = Array.from(activePointers.values());
+        lastPinchDist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+      }
+    });
+
+    window.addEventListener("pointermove", e => {
+      if (!activePointers.has(e.pointerId)) return;
+      activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+      if (activePointers.size === 2) {
+        const pts = Array.from(activePointers.values());
+        const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+        const midX = (pts[0].x + pts[1].x) / 2;
+        const midY = (pts[0].y + pts[1].y) / 2;
+        if (lastPinchDist && lastPinchDist > 10) {
+          zoomAtPoint(dist / lastPinchDist, midX, midY);
+        }
+        lastPinchDist = dist;
+        dragMoved = true;
+        return;
+      }
+
+      if (!isPointerDown) return;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      if (Math.hypot(dx, dy) > 5) {
+        dragMoved = true;
+        mapViewport.classList.add("panning");
+      }
+      if (dragMoved) {
+        state.tx = startTx + dx;
+        state.ty = startTy + dy;
+        applyTransform();
+      }
+    });
+
+    function endPointer(e) {
+      activePointers.delete(e.pointerId);
+      if (activePointers.size < 2) lastPinchDist = null;
+      if (activePointers.size === 0) {
+        isPointerDown = false;
+        mapViewport.classList.remove("panning");
+      }
+    }
+    window.addEventListener("pointerup", endPointer);
+    window.addEventListener("pointercancel", endPointer);
+
+    // Delegated click handling on nodes & toggle buttons
+    nodesLayer.addEventListener("click", e => {
+      if (dragMoved) return;
+
+      const toggleBtn = e.target.closest("[data-toggle-id]");
+      if (toggleBtn) {
+        e.stopPropagation();
+        const tid = toggleBtn.dataset.toggleId;
+        if (state.collapsed.has(tid)) {
+          state.collapsed.delete(tid);
+        } else {
+          state.collapsed.add(tid);
+        }
+        renderMindMap();
+        return;
+      }
+
+      const nodeCard = e.target.closest(".mm-node");
+      if (nodeCard) {
+        const nid = nodeCard.dataset.nodeId;
+        state.selectedId = nid;
+        if (state.recallMask) {
+          if (state.revealed.has(nid)) state.revealed.delete(nid);
+          else state.revealed.add(nid);
+        }
+        renderMindMap();
+        openDetailDrawer(nid);
+      }
+    });
+
+    // =========================================================================
+    // 6. 右侧考点原文精读抽屉
+    // =========================================================================
+    const detailDrawer = document.getElementById("detailDrawer");
+    const drawerBadges = document.getElementById("drawerBadges");
+    const drawerTitle = document.getElementById("drawerTitle");
+    const drawerBody = document.getElementById("drawerBody");
+
+    function openDetailDrawer(nodeId) {
+      const node = state.nodeMap.get(nodeId);
+      if (!node) return;
+
+      const badges = [];
+      if (node.star === 3) badges.push('<span class="badge badge-star3">★★★ 期末必背</span>');
+      else if (node.star === 2) badges.push('<span class="badge badge-star2">★★ 高频重点</span>');
+      else if (node.star === 1) badges.push('<span class="badge badge-star1">★ 基础识记</span>');
+      if (node.type === "supp") badges.push('<span class="badge badge-supp">💡 课外重点补充</span>');
+      if (node.type === "warn") badges.push('<span class="badge badge-warn">⚠️ 易混辨析考点</span>');
+      if (node.page) badges.push(`<span class="badge badge-page">出处：${node.page}</span>`);
+      drawerBadges.innerHTML = badges.join("");
+      drawerTitle.textContent = node.title;
+
+      let bodyHtml = "";
+      if (node.mnemonic) {
+        bodyHtml += `
+          <div class="drawer-section" style="background:#eef2ff; border-color:#c7d2fe;">
+            <div class="drawer-sec-title" style="color:#3730a3;">⚡ 记忆锚点 / 背诵口诀</div>
+            <div style="font-weight:700; color:#1e1b4b;">${node.mnemonic}</div>
+          </div>`;
+      }
+
+      if (node.summary) {
+        bodyHtml += `
+          <div class="drawer-section">
+            <div class="drawer-sec-title">📌 核心精要</div>
+            <div>${node.summary}</div>
+          </div>`;
+      }
+
+      if (node.detail && node.detail.length > 0) {
+        const boxClass = node.type === "warn" ? "warn-box" : (node.type === "supp" ? "supp-box" : "");
+        const secLabel = node.type ? "📖 课件原文 × 考纲补充与辨析" : "📖 课件原文与细分要点";
+        bodyHtml += `
+          <div class="drawer-section ${boxClass}">
+            <div class="drawer-sec-title">${secLabel}</div>
+            <ul class="drawer-list">
+              ${node.detail.map(item => `<li>${item}</li>`).join("")}
+            </ul>
+          </div>`;
+      }
+
+      if (node.children && node.children.length > 0) {
+        bodyHtml += `
+          <div class="drawer-section">
+            <div class="drawer-sec-title">🌿 下属子分支（共 ${node.children.length} 项，点击直达）</div>
+            <div style="display:flex; flex-direction:column; gap:6px; margin-top:4px;">
+              ${node.children.map(c => `<button type="button" class="chip-btn" data-jump-id="${c.id}" style="justify-content:space-between; text-align:left;"><span>${c.title}</span><span style="color:#64748b;">→</span></button>`).join("")}
+            </div>
+          </div>`;
+      }
+
+      if (node.links && node.links.length > 0) {
+        bodyHtml += `
+          <div class="drawer-section">
+            <div class="drawer-sec-title">🔗 权威拓展来源（课外补充依据）</div>
+            <div style="display:flex; flex-direction:column; gap:4px;">
+              ${node.links.map(lk => `<a class="drawer-link" href="${lk.url}" target="_blank" rel="noopener noreferrer">↗ ${lk.label}</a>`).join("")}
+            </div>
+          </div>`;
+      }
+
+      drawerBody.innerHTML = bodyHtml;
+      detailDrawer.classList.add("open");
+    }
+
+    drawerBody.addEventListener("click", e => {
+      const jumpBtn = e.target.closest("[data-jump-id]");
+      if (jumpBtn) {
+        const jid = jumpBtn.dataset.jumpId;
+        state.selectedId = jid;
+        focusNode(jid);
+        renderMindMap();
+        openDetailDrawer(jid);
+      }
+    });
+
+    document.getElementById("btnCloseDrawer").addEventListener("click", () => {
+      detailDrawer.classList.remove("open");
+    });
+
+    // =========================================================================
+    // 7. 顶部工具栏、缩放按钮、搜索与快捷键绑定
+    // =========================================================================
+    document.getElementById("btnZoomIn").addEventListener("click", () => {
+      const rect = mapViewport.getBoundingClientRect();
+      zoomAtPoint(1.2, rect.left + rect.width / 2, rect.top + rect.height / 2);
+    });
+    document.getElementById("btnZoomOut").addEventListener("click", () => {
+      const rect = mapViewport.getBoundingClientRect();
+      zoomAtPoint(0.82, rect.left + rect.width / 2, rect.top + rect.height / 2);
+    });
+    document.getElementById("btnZoomReset").addEventListener("click", () => {
+      state.scale = 1.0;
+      focusNode(state.selectedId || "root", 1.0);
+    });
+    document.getElementById("btnZoomFit").addEventListener("click", () => {
+      fitToScreen();
+    });
+
+    // Mode Tabs
+    const mapToolbar = document.getElementById("mapToolbar");
+    document.querySelectorAll("[data-mode]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const m = btn.dataset.mode;
+        state.mode = m;
+        document.querySelectorAll("[data-mode]").forEach(b => b.classList.toggle("active", b === btn));
+        document.getElementById("panelMap").classList.toggle("active", m === "map");
+        document.getElementById("panelTables").classList.toggle("active", m === "tables");
+        document.getElementById("panelQuiz").classList.toggle("active", m === "quiz");
+        mapToolbar.classList.toggle("hidden", m !== "map");
+        if (m === "map") {
+          renderMindMap();
+        }
+      });
+    });
+
+    // Chapter Focus Buttons (Isolate single-chapter subtree so full expansion never shrinks small)
+    document.querySelectorAll("[data-focus]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("[data-focus]").forEach(b => b.classList.toggle("active", b === btn));
+        const target = btn.dataset.focus;
+        state.rootScope = target;
+        if (target === "root") {
+          renderMindMap();
+          fitToScreen();
+        } else {
+          state.collapsed.delete(target);
+          const chNode = state.nodeMap.get(target);
+          if (chNode && chNode.children) {
+            chNode.children.forEach(c => state.collapsed.delete(c.id));
+          }
+          state.selectedId = target;
+          renderMindMap();
+          fitToScreen(36);
+        }
+      });
+    });
+
+    // Depth Buttons
+    document.querySelectorAll("[data-depth]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("[data-depth]").forEach(b => b.classList.toggle("active", b === btn));
+        const d = parseInt(btn.dataset.depth, 10);
+        setExpandDepth(d);
+        if (state.rootScope !== "root") {
+          state.collapsed.delete(state.rootScope);
+          renderMindMap();
+        }
+        fitToScreen();
+      });
+    });
+
+    // Filter Buttons
+    document.querySelectorAll("[data-filter]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("[data-filter]").forEach(b => b.classList.toggle("active", b === btn));
+        state.filter = btn.dataset.filter;
+        if (state.filter !== "all") {
+          state.nodeMap.forEach(n => {
+            if (n.children && subtreeHasMatch(n, matchesFilter)) {
+              state.collapsed.delete(n.id);
+            }
+          });
+        }
+        renderMindMap();
+        fitToScreen();
+      });
+    });
+
+    // Card Density Toggle (Clean Xmind Mode vs Detailed Card Mode)
+    const btnCardDensity = document.getElementById("btnCardDensity");
+    btnCardDensity.addEventListener("click", () => {
+      state.compactCards = !state.compactCards;
+      btnCardDensity.classList.toggle("active", state.compactCards);
+      btnCardDensity.textContent = state.compactCards ? "✨ 极简骨架" : "📖 口诀详卡";
+      renderMindMap();
+      fitToScreen();
+    });
+
+    // Active Recall Mask Button
+    const btnRecallMask = document.getElementById("btnRecallMask");
+    btnRecallMask.addEventListener("click", () => {
+      state.recallMask = !state.recallMask;
+      state.revealed.clear();
+      btnRecallMask.classList.toggle("recall-active", state.recallMask);
+      btnRecallMask.textContent = state.recallMask ? "👁️ 关闭遮罩" : "🙈 背诵遮罩";
+      renderMindMap();
+    });
+
+    // Search Input & Navigation
+    const searchInput = document.getElementById("searchInput");
+    const searchCount = document.getElementById("searchCount");
+
+    function runSearch(query) {
+      state.searchQuery = query.trim().toLowerCase();
+      state.searchHits = [];
+      state.searchIdx = 0;
+
+      if (!state.searchQuery) {
+        searchCount.textContent = "";
+        renderMindMap();
+        return;
+      }
+
+      state.nodeMap.forEach(n => {
+        const hay = [n.title, n.summary || "", n.mnemonic || "", ...(n.detail || [])].join(" ").toLowerCase();
+        if (hay.includes(state.searchQuery)) {
+          state.searchHits.push(n.id);
+        }
+      });
+
+      if (state.searchHits.length > 0) {
+        if (state.rootScope !== "root") {
+          state.rootScope = "root";
+          document.querySelectorAll("[data-focus]").forEach(b => b.classList.toggle("active", b.dataset.focus === "root"));
+        }
+        searchCount.textContent = `1/${state.searchHits.length}`;
+        const firstId = state.searchHits[0];
+        state.selectedId = firstId;
+        focusNode(firstId, 0.98);
+        renderMindMap();
+        openDetailDrawer(firstId);
+      } else {
+        searchCount.textContent = "无匹配";
+        renderMindMap();
+      }
+    }
+
+    searchInput.addEventListener("input", e => runSearch(e.target.value));
+
+    function stepSearch(dir) {
+      if (state.searchHits.length === 0) return;
+      state.searchIdx = (state.searchIdx + dir + state.searchHits.length) % state.searchHits.length;
+      searchCount.textContent = `${state.searchIdx + 1}/${state.searchHits.length}`;
+      const hitId = state.searchHits[state.searchIdx];
+      state.selectedId = hitId;
+      focusNode(hitId, 0.98);
+      renderMindMap();
+      openDetailDrawer(hitId);
+    }
+
+    document.getElementById("btnSearchPrev").addEventListener("click", () => stepSearch(-1));
+    document.getElementById("btnSearchNext").addEventListener("click", () => stepSearch(1));
+    document.getElementById("btnSearchClear").addEventListener("click", () => {
+      searchInput.value = "";
+      runSearch("");
+    });
+
+    // Keyboard shortcuts
+    window.addEventListener("keydown", e => {
+      if (document.activeElement === searchInput) {
+        if (e.key === "Enter") stepSearch(e.shiftKey ? -1 : 1);
+        return;
+      }
+      if (state.mode !== "map") return;
+      if (e.key === "+" || e.key === "=") {
+        const rect = mapViewport.getBoundingClientRect();
+        zoomAtPoint(1.15, rect.left + rect.width / 2, rect.top + rect.height / 2);
+      } else if (e.key === "-") {
+        const rect = mapViewport.getBoundingClientRect();
+        zoomAtPoint(0.86, rect.left + rect.width / 2, rect.top + rect.height / 2);
+      } else if (e.key === "0") {
+        fitToScreen();
+      } else if (e.key === "Escape") {
+        detailDrawer.classList.remove("open");
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (state.mode === "map") drawMinimap();
+    });
+
+    // =========================================================================
+    // 8. 考前自测 10 问卡片渲染
+    // =========================================================================
+    const quizGrid = document.getElementById("quizGrid");
+    const quizProgressFill = document.getElementById("quizProgressFill");
+    const quizProgressText = document.getElementById("quizProgressText");
+
+    function saveQuizState() {
+      try {
+        localStorage.setItem("mgmt_mindmap_quiz_v1", JSON.stringify(Array.from(state.masteredQuiz)));
+      } catch (err) {
+        // Ignore storage error
+      }
+    }
+
+    function renderQuiz() {
+      const total = QUIZ_DATA.length;
+      const done = state.masteredQuiz.size;
+      const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+      quizProgressFill.style.width = `${pct}%`;
+      quizProgressText.textContent = `已掌握 ${done} / ${total}`;
+
+      quizGrid.innerHTML = QUIZ_DATA.map((item, idx) => {
+        const isMastered = state.masteredQuiz.has(idx);
+        return `
+          <div class="quiz-card ${isMastered ? "mastered" : ""}" data-quiz-card="${idx}">
+            <div class="quiz-q">${item.q}</div>
+            <div class="quiz-ans">${item.a}</div>
+            <div class="quiz-actions">
+              <button type="button" class="chip-btn" data-quiz-reveal="${idx}">👁️ 查看/收起采分点</button>
+              <button type="button" class="chip-btn ${isMastered ? "active" : ""}" data-quiz-master="${idx}">
+                ${isMastered ? "✅ 已掌握" : "⭕ 标记已掌握"}
+              </button>
+            </div>
+          </div>`;
+      }).join("");
+    }
+
+    quizGrid.addEventListener("click", e => {
+      const revBtn = e.target.closest("[data-quiz-reveal]");
+      if (revBtn) {
+        const card = revBtn.closest(".quiz-card");
+        if (card) card.classList.toggle("show-ans");
+        return;
+      }
+      const masBtn = e.target.closest("[data-quiz-master]");
+      if (masBtn) {
+        const idx = parseInt(masBtn.dataset.quizMaster, 10);
+        if (state.masteredQuiz.has(idx)) state.masteredQuiz.delete(idx);
+        else state.masteredQuiz.add(idx);
+        saveQuizState();
+        renderQuiz();
+      }
+    });
+
+    document.getElementById("btnResetQuiz").addEventListener("click", () => {
+      state.masteredQuiz.clear();
+      saveQuizState();
+      renderQuiz();
+    });
+
+    // Tap empty canvas on mobile closes bottom-sheet drawer; double-tap toggles zoom
+    let lastCanvasTap = 0;
+    mapViewport.addEventListener("click", e => {
+      if (dragMoved) return;
+      if (e.target === mapViewport || e.target === mapWorld || e.target === edgesSvg) {
+        if (window.innerWidth <= 768 && detailDrawer.classList.contains("open")) {
+          detailDrawer.classList.remove("open");
+          return;
+        }
+        const now = Date.now();
+        if (now - lastCanvasTap < 300) {
+          const nextFactor = state.scale < 0.75 ? (0.95 / state.scale) : (0.52 / state.scale);
+          zoomAtPoint(nextFactor, e.clientX, e.clientY);
+          lastCanvasTap = 0;
+        } else {
+          lastCanvasTap = now;
+        }
+      }
+    });
+
+    // Swipe down on drawer header/grabber to dismiss on mobile
+    let drawerTouchY = null;
+    const drawerHeaderEl = document.getElementById("drawerHeader");
+    const drawerGrabberEl = document.getElementById("drawerGrabber");
+    [drawerHeaderEl, drawerGrabberEl].forEach(el => {
+      el.addEventListener("touchstart", e => {
+        if (e.touches.length === 1) drawerTouchY = e.touches[0].clientY;
+      }, { passive: true });
+      el.addEventListener("touchmove", e => {
+        if (drawerTouchY !== null && e.touches[0].clientY - drawerTouchY > 48) {
+          detailDrawer.classList.remove("open");
+          drawerTouchY = null;
+        }
+      }, { passive: true });
+      el.addEventListener("touchend", () => { drawerTouchY = null; }, { passive: true });
+    });
+
+    // When focusing a node on mobile while bottom sheet is open, place node in top 38% visible area
+    const _origFocusNode = focusNode;
+    focusNode = function(nodeId, targetScale = null) {
+      _origFocusNode(nodeId, targetScale);
+      if (window.innerWidth <= 768) {
+        const n = state.nodeMap.get(nodeId);
+        if (!n) return;
+        const vw = mapViewport.clientWidth || 375;
+        const vh = mapViewport.clientHeight || 667;
+        const cx = n._x + n._w / 2;
+        const cy = n._y + n._h / 2;
+        state.tx = vw * 0.50 - cx * state.scale;
+        state.ty = vh * 0.24 - cy * state.scale;
+        applyTransform();
+      }
+    };
+
+    // =========================================================================
+    // 9. 初始化启动（自动识别手机竖屏与电脑宽屏）
+    // =========================================================================
+    window.addEventListener("load", () => {
+      if (window.innerWidth <= 768) {
+        state.minimapMinimized = true;
+        minimapBox.classList.add("minimized");
+        document.getElementById("minimapToggleIcon").textContent = "▴";
+        // On phone portrait: start with crisp readable Level-1 overview so user sees Root + 3 Chapters clearly immediately
+        setExpandDepth(1);
+        document.querySelectorAll("[data-depth]").forEach(b => {
+          b.classList.toggle("active", b.dataset.depth === "1");
+        });
+        fitToScreen(18);
+      } else {
+        setExpandDepth(2);
+        document.querySelectorAll("[data-depth]").forEach(b => {
+          b.classList.toggle("active", b.dataset.depth === "2");
+        });
+        fitToScreen(34);
+      }
+      renderQuiz();
+    });
+  </script>
+</body>
+</html>
